@@ -39,5 +39,6 @@ class ShowUserInfo extends Command
             echo $row->email . PHP_EOL;
             echo $row->password . PHP_EOL;
         }
+        Log::info('----------------------');
     }
 }
