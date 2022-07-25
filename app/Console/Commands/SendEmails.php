@@ -9,7 +9,7 @@ class SendEmails extends Command
 {
     /**
      * The name and signature of the console command.
-     *
+     * To run: php artisan mail:send EMAIL
      * @var string
      */
     protected $signature = 'mail:send {email?}';
