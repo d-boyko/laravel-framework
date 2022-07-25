@@ -26,7 +26,11 @@ class UserController extends Controller
             ->get();
 
         foreach ($query as $row) {
-            echo 'PROFILE: ' . $row->name . PHP_EOL;
+            echo 'PROFILE: ' . PHP_EOL;
+            echo $row->name . PHP_EOL;
+            echo $row->email . PHP_EOL;
+            echo $row->email_verified_at . PHP_EOL;
+            echo $row->password . PHP_EOL;
         }
     }
 
