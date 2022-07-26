@@ -24,6 +24,8 @@ class UserFactory extends Factory
             'password'          => Str::random(15), // password
             'remember_token'    => Str::random(10),
             'status'            => fake()->boolean,
+            'member_hash'       => Str::random(25),
+            'user_hash'         => Str::random(25),
         ];
     }
 
