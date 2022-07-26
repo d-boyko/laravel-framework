@@ -29,12 +29,14 @@ class ShowWithAskUserPassword extends Command
     public function handle(): void
     {
         $password = $this->ask('What password?');
-        $response = DB::table('users')
-            ->where('password', '=', $password)
-            ->get();
+        if ($this->confirm('Do you want to continue?')) {
+            $response = DB::table('users')
+                ->where('password', '=', $password)
+                ->get();
 
-        foreach($response as $row) {
-            echo $row->name . PHP_EOL;
+            foreach ($response as $row) {
+                echo $row->name . PHP_EOL;
+            }
         }
     }
 }
