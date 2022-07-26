@@ -12,7 +12,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        DB::statement('ALTER TABLE users ADD COLUMN member_id STRING');
+        DB::statement('ALTER TABLE users ADD member_hash VARCHAR(255)');
     }
 
     /**
@@ -22,6 +22,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        DB::statement('ALTER TABLE users DROP COLUMN member_id');
+        DB::statement('ALTER TABLE users DROP COLUMN member_hash');
     }
 };
