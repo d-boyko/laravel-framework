@@ -2,36 +2,28 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Order;
-use Illuminate\Support\Facades\DB;
-
 class OrderController extends Controller
 {
-    public function getOrdersList(): void
+    public function getOrdersList()
     {
-        $query = Order::all();
+        $order = (object)[
+            'number' => 10000,
+            'cost' => 3000,
+            'name' => 'Daniil'
+        ];
+        $list = array_fill(0, 10, $order);
 
-        foreach($query as $row) {
-            echo $row->message . '<br>';
-            echo $row->cost . '<br>';
-            echo '<br>';
-        }
+        return view('orders.index', compact('list'));
     }
 
-    public function getCurrentOrder($id): void
+    public function getCurrentOrder($id)
     {
-        $query = DB::table('orders')
-            ->join('users', 'orders.user_id', '=', 'users.id')
-            ->where('orders.id', '=', $id)
-            ->select('users.name', 'users.email', 'message', 'cost')
-            ->get();
+        $id = (object)[
+            'number' => 3241,
+            'cost' => 42000,
+            'name' => 'Thomas',
+        ];
 
-        foreach ($query as $row) {
-            echo $row->name . '<br>';
-            echo $row->email . '<br>';
-            echo $row->message . '<br>';
-            echo $row->cost . '<br>';
-            echo '<br>';
-        }
+        return view('orders.order', compact('id'));
     }
 }

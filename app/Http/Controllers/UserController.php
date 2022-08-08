@@ -3,20 +3,17 @@
 // DONE
 namespace App\Http\Controllers;
 
-use App\Models\User;
 use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
-    public function getUsersList(): void
+    public function getUsersList()
     {
-        $query = User::all();
+        $response = DB::table('users')
+            ->select('*')
+            ->get();
 
-        foreach ($query as $row) {
-            echo $row->name . '<br>';
-            echo $row->email . '<br>';
-            echo '<br>';
-        }
+        return view('users.index', compact('response'));
     }
 
     public function getProfile($id): void
