@@ -10,4 +10,10 @@ class RegisterController extends Controller
     {
         return view('register.index');
     }
+
+    public function store()
+    {
+        dd(app()->make('request'));
+        return 'Request to registrate';
+    }
 }

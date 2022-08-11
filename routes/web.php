@@ -16,11 +16,17 @@ use App\Http\Controllers\BlogController;
 |
 */
 
-Route::view('/', 'home.index')->name('home');
+//Route::view('/', 'home.index')->name('home');
+
+Route::get('/', function() {
+    return view('home.index');
+})->name('home');
 
 Route::get('/login', [LoginController::class, 'index'])->name('login');
+Route::post('/login/', [LoginController::class, 'store'])->name('login.store');
 
 Route::get('/register', [RegisterController::class, 'index'])->name('register');
+Route::post('/register', [RegisterController::class, 'store'])->name('register.store');
 
 Route::get('/blog', [BlogController::class, 'index'])->name('blog');
 Route::get('/blog/{post}', [BlogController::class, 'show'])->name('blog.show');
@@ -38,5 +44,5 @@ Route::get('/documentation', function() {
 })->name('documentation');
 
 Route::fallback(function () {
-    return view('welcome');
-})->name('welcome-page');
+    return view('home');
+});

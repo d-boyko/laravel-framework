@@ -1,35 +1,55 @@
-<header class="py-3 border-bottom">
+<nav class="navbar navbar-expand-md bg-light">
     <div class="container">
+        <a href=" {{ route('home') }}" class="navbar-brand">
+            {{ config('app.name') }}
+        </a>
 
-        <div class="d-flex justify-content-between">
-            <div>
-                <ul class="list-unstyled d-flex">
-                    <li class="me-3">
-                        <a href="{{ route('home') }}">
-                            {{ config('app.name') }}
+        <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-md-0">
+                    <li class="nav-item">
+                        <a href="{{ route('home') }}" class="nav-link {{ \Illuminate\Support\Facades\Route::is('home') ? 'active' : '' }}" aria-current="page">
+                            {{ __('Main Page') }}
                         </a>
                     </li>
 
-                    <li class="me-3">
-                        <a href="{{ route('blog') }}">
-                            Blog
+                    <li class="nav-item">
+                        <a href="{{ route('blog') }}" class="nav-link {{ \Illuminate\Support\Facades\Route::is('blog') ? 'active' : '' }}" aria-current="page">
+                            {{ __('Blogs') }}
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="{{ route('users.posts') }}" class="nav-link {{ \Illuminate\Support\Facades\Route::is('users.posts') ? 'active' : '' }}" aria-current="page">
+                            {{ __('Posts') }}
                         </a>
                     </li>
                 </ul>
-            </div>
+        </div>
 
-            <ul class="list-unstyled d-flex">
-                <li class="ms-3">
-                    <a href="{{ route('register') }}">
-                        Registration
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ms-auto mb-2 mb-md-0">
+                <li class="nav-item">
+                    <a href="{{ route('login') }}" class="nav-link {{ \Illuminate\Support\Facades\Route::is('login') ? 'active' : '' }}" aria-current="page">
+                        {{ __('Login') }}
                     </a>
                 </li>
 
-                <li class="ms-3">
-                    <a href="{{ route('login') }}">
-                        Login
+                <li class="nav-item">
+                    <a href="{{ route('register') }}" class="nav-link {{ \Illuminate\Support\Facades\Route::is('register') ? 'active' : '' }}" aria-current="page">
+                        {{ __('Registration') }}
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="{{ route('users.list') }}" class="nav-link {{ \Illuminate\Support\Facades\Route::is('users.list') ? 'active' : '' }}" aria-current="page">
+                        {{ __('Users') }}
                     </a>
                 </li>
             </ul>
         </div>
-</header>
+    </div>
+</nav>

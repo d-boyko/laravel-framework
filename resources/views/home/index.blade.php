@@ -1,5 +1,7 @@
-@extends('layouts.base')
+@extends('layouts.main')
 
-@section('content')
-    <h1>Main page</h1>
+@section('main.content')
+    <div style="text-align: center">
+        <h1>Main page</h1>
+    </div>
 @endsection

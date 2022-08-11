@@ -11,7 +11,7 @@ class BlogController extends Controller
         $post = (object) [
             'id' => 123,
             'title' => 'Jack\'s thing',
-            'content' => '<strong>Some text</strong>',
+            'content' => '<strong>Lorem ipsum dolor sit amet, consectetur adipiscing elit. </strong>',
         ];
 
         $posts = array_fill(0, 10, $post);
@@ -40,7 +40,7 @@ class BlogController extends Controller
         $post = (object) [
             'id' => 123,
             'title' => 'Jack\'s thing',
-            'content' => '<strong>Some text</strong>',
+            'content' => '<strong>Lorem ipsum dolor sit amet, consectetur adipiscing elit. </strong>',
         ];
 
         return view('blog.show', compact('post'));

@@ -5,19 +5,21 @@
 @endsection
 
 @section('content')
-    @if(empty($response))
-        There are no users
-    @else
-        @foreach($response as $row)
-            <div>
-                Name: {{ $row->name }}
+    <div style="text-align: center;">
+        @if(empty($response))
+            There are no users
+        @else
+            @foreach($response as $row)
+                <div>
+                    Name: {{ $row->name }}
+                    <br>
+                    Email: {{ $row->email }}
+                    <br>
+                    Password: {{ $row->password }}
+                </div>
                 <br>
-                Email: {{ $row->email }}
                 <br>
-                Password: {{ $row->password }}
-            </div>
-            <br>
-            <br>
-        @endforeach
-    @endif
+            @endforeach
+        @endif
+    </div>
 @endsection

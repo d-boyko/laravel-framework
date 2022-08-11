@@ -4,10 +4,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\DB;
+use Illuminate\View\Factory;
+use Illuminate\View\View;
+use Illuminate\Contracts\Foundation\Application;
 
 class UserController extends Controller
 {
-    public function getUsersList()
+    public function getUsersList(): Factory|View|Application
     {
         $response = DB::table('users')
             ->select('*')
