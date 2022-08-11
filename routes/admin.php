@@ -7,12 +7,12 @@ use App\Http\Middleware\RedirectIfNotAdmin;
 
 Route::prefix('admin-snapshot')->group(function() {
     Route::group(['middleware' => RedirectIfNotAdmin::class], function() {
-        Route::get('/{id}/profile', [UserController::class, 'getProfile'])->name('users.profile');
-        Route::get('/{id}/orders', [UserController::class, 'getUserOrders'])->name('users.order');
+        Route::get('/{id}/profile', [UserController::class, 'getProfile'])->name('user.profile');
+        Route::get('/{id}/orders', [UserController::class, 'getUserOrders'])->name('user.order');
         Route::get('/orders/list', [OrderController::class, 'getOrdersList'])->name('orders.list');
         Route::get('/order/{id}', [OrderController::class, 'getCurrentOrder'])->name('order.user');
-        Route::get('/users/list', [UserController::class, 'getUsersList'])
+        Route::get('/user/list', [UserController::class, 'getUsersList'])
             ->middleware(RedirectIfNotAdmin::class)
-            ->name('users.list');
+            ->name('user.list');
     });
 });

@@ -23,13 +23,13 @@ Route::get('/', function() {
 })->name('home');
 
 Route::get('/login', [LoginController::class, 'index'])->name('login');
-Route::post('/login/', [LoginController::class, 'store'])->name('login.store');
+Route::post('/login', [LoginController::class, 'store'])->name('login.store');
 
 Route::get('/register', [RegisterController::class, 'index'])->name('register');
 Route::post('/register', [RegisterController::class, 'store'])->name('register.store');
 
 Route::get('/blog', [BlogController::class, 'index'])->name('blog');
-Route::get('/blog/{post}', [BlogController::class, 'show'])->name('blog.show');
+Route::get('/blog/{posts}', [BlogController::class, 'show'])->name('blog.show');
 
 Route::get('/dashboard', function () {
     return view('dashboard');

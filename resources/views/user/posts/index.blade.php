@@ -8,7 +8,7 @@
 
         <x-slot name="right">
             <div class="justify-content-between">
-                <x-button-link href="{{ route('users.posts.create') }}">
+                <x-button-link href="{{ route('user.posts.create') }}">
                     {{ __('Create') }}
                 </x-button-link>
             </div>
@@ -23,7 +23,7 @@
                 <div class="mb-3 h6">
                     <div>
                         <h5>
-                            <a href="{{ route('users.posts.show', $post->id) }}">
+                            <a href="{{ route('user.posts.show', $post->id) }}">
                                 {{ $post->title }}
                             </a>
                         </h5>
@@ -41,7 +41,7 @@
         </div>
     @endif
     {{--        @json($foo)--}}
-    {{--        @foreach($posts as $post)--}}
-    {{--            {{ $post }}--}}
+    {{--        @foreach($posts as $posts)--}}
+    {{--            {{ $posts }}--}}
     {{--        @endforeach--}}
 @endsection

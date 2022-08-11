@@ -71,8 +71,9 @@
                                                 </div>
                                             </x-form-item>
 
+
                                             <x-form-item>
-                                                <x-checkbox type="checkbox">
+                                                <x-checkbox name="agreement" :checked="!! request()->old('agreement')">
                                                     {{ __('I agree with saving and using personal data')  }}
                                                 </x-checkbox>
                                             </x-form-item>

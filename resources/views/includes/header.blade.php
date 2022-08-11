@@ -23,7 +23,7 @@
                     </li>
 
                     <li class="nav-item">
-                        <a href="{{ route('users.posts') }}" class="nav-link {{ \Illuminate\Support\Facades\Route::is('users.posts') ? 'active' : '' }}" aria-current="page">
+                        <a href="{{ route('user.posts') }}" class="nav-link {{ \Illuminate\Support\Facades\Route::is('user.posts') ? 'active' : '' }}" aria-current="page">
                             {{ __('Posts') }}
                         </a>
                     </li>
@@ -45,7 +45,7 @@
                 </li>
 
                 <li class="nav-item">
-                    <a href="{{ route('users.list') }}" class="nav-link {{ \Illuminate\Support\Facades\Route::is('users.list') ? 'active' : '' }}" aria-current="page">
+                    <a href="{{ route('user.list') }}" class="nav-link {{ \Illuminate\Support\Facades\Route::is('user.list') ? 'active' : '' }}" aria-current="page">
                         {{ __('Users') }}
                     </a>
                 </li>

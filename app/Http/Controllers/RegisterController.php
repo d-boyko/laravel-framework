@@ -11,9 +11,29 @@ class RegisterController extends Controller
         return view('register.index');
     }
 
-    public function store()
+    public function store(Request $request)
     {
-        dd(app()->make('request'));
+//        $request = app('request');
+//        dd(app()->make('request'));
+//        dd(app('request'));
+//        dd($request);
+
+//        $request = request();
+//        dd($request);
+
+//        $data = $request->all();
+//        $data = $request->only(['name', 'email']);
+
+//        $data = $request->except(['name', 'email']);
+
+        $name = $request->input('name');
+        $email = $request->email;
+        $password = $request->password;
+//        $remember = !! $request->Remember;
+//        $avatar = $request->file('avatar');
+        $agreement = $request->boolean('Remember');
+
+        dd($name, $email, $password, $agreement);
         return 'Request to registrate';
     }
 }

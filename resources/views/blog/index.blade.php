@@ -1,12 +1,15 @@
 @extends('layouts.main')
 
+@section('page.title', 'Daniil Boyko')
+
 @section('main.content')
     <x-title>
-        {{ __('All blogs') }}
+        {{ __('List of posts') }}
     </x-title>
-        @if(empty($posts))
-            There are no posts
-        @else
+
+    @if(empty($posts))
+        {{ __('There are no posts.') }}
+    @else
         <div class="row">
             @foreach($posts as $post)
                 <div class="col-12 col-md-4">
@@ -32,9 +35,5 @@
                 </div>
             @endforeach
         </div>
-        @endif
-{{--        @json($foo)--}}
-{{--        @foreach($posts as $post)--}}
-{{--            {{ $post }}--}}
-{{--        @endforeach--}}
+    @endif
 @endsection

@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 
 class LoginController extends Controller
 {
-    public function index(): \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Contracts\Foundation\Application
+    public function index(): Factory|View|Application
     {
 //        return app('view')->make('login.index');
 //        return view()->make('login.index');
@@ -14,8 +17,19 @@ class LoginController extends Controller
         return view('login.index');
     }
 
-    public function store(): int
+    public function store(Request $request)
     {
-        return 0;
+        $ip = $request->ip();
+        $path = $request->path();
+        $url = $request->url();
+        $fullUrl = $request->fullUrl();
+
+        dd($ip, $path, $url, $fullUrl);
+
+        $email = $request->email;
+        $password = $request->password;
+        $agreement = $request->boolean('Remember');
+
+        dd($email, $password, $agreement);
     }
 }

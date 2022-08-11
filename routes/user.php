@@ -1,17 +1,18 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
+use Illuminate\Support\Facades\Route;
 
-Route::prefix('/user')->group(function () {
+// Route::prefix('user')->middleware('auth', 'active')->group(function () {
+Route::prefix('user')->group(function () {
     Route::redirect('/', '/user/posts')->name('user');
-    Route::get('/posts', [PostController::class, 'index'])->name('users.posts');
-    Route::get('/posts/create', [PostController::class, 'create'])->name('users.posts.create');
-    Route::post('/posts', [PostController::class, 'store'])->name('users.posts.store');
-    Route::get('/posts/{post}', [PostController::class, 'show'])->name('users.posts.show');
-    Route::get('/posts/edit/{post}', [PostController::class, 'edit'])->name('users.posts.edit');
-    Route::post('/posts/edit/{post}', [PostController::class, 'edit'])->name('users.posts.edit');
-    Route::put('/posts', [PostController::class, 'update'])->name('users.posts.update');
-    Route::delete('/posts', [PostController::class, 'delete'])->name('users.posts.delete');
-    Route::put('/posts', [PostController::class, 'like'])->name('users.posts.like');
+
+    Route::get('posts', [PostController::class, 'index'])->name('user.posts');
+    Route::get('posts/create', [PostController::class, 'create'])->name('user.posts.create');
+    Route::post('posts', [PostController::class, 'store'])->name('user.posts.store');
+    Route::get('posts/{posts}', [PostController::class, 'show'])->name('user.posts.show');
+    Route::get('posts/{posts}/edit', [PostController::class, 'edit'])->name('user.posts.edit');
+    Route::put('posts/{posts}', [PostController::class, 'update'])->name('user.posts.update');
+    Route::delete('posts/{posts}', [PostController::class, 'delete'])->name('user.posts.delete');
+    Route::put('posts/{posts}/like', [PostController::class, 'like'])->name('user.posts.like');
 });
