@@ -67,13 +67,13 @@
                                                     <x-label required>
                                                         {{ __('Age') }}
                                                     </x-label>
+{{--                                                    <x-input name="age" value="{{ request()->old('age') }}"></x-input>--}}
                                                     <x-input name="age"></x-input>
                                                 </div>
                                             </x-form-item>
 
-
                                             <x-form-item>
-                                                <x-checkbox name="agreement" :checked="!! request()->old('agreement')">
+                                                <x-checkbox name="agreement">
                                                     {{ __('I agree with saving and using personal data')  }}
                                                 </x-checkbox>
                                             </x-form-item>

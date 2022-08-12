@@ -45,7 +45,7 @@
                         </x-form-item>
 
                         <x-form-item>
-                            <x-checkbox type="checkbox">
+                            <x-checkbox name="agreement">
                                 {{ __('Remember me')  }}
                             </x-checkbox>
                         </x-form-item>

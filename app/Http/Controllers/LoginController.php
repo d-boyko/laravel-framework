@@ -19,17 +19,28 @@ class LoginController extends Controller
 
     public function store(Request $request)
     {
-        $ip = $request->ip();
-        $path = $request->path();
-        $url = $request->url();
-        $fullUrl = $request->fullUrl();
+//        $ip = $request->ip();
+//        $path = $request->path();
+//        $url = $request->url();
+//        $fullUrl = $request->fullUrl();
+//
+//        dd($ip, $path, $url, $fullUrl);
+//
+//        $email = $request->email;
+//        $password = $request->password;
+//        $agreement = $request->boolean('Remember');
+//
+//        dd($email, $password, $agreement);
 
-        dd($ip, $path, $url, $fullUrl);
+//        return response('Request to login');
 
-        $email = $request->email;
-        $password = $request->password;
-        $agreement = $request->boolean('Remember');
+//        return response()->redirectTo('/foo');
+//        return response()->redirectToRoute('user');
+        $session = app()->make('session');
+        dd($session);
 
-        dd($email, $password, $agreement);
+        if (true) {
+            return redirect()->back()->withInput();
+        }
     }
 }

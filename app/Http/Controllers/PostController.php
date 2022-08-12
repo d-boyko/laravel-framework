@@ -7,6 +7,7 @@ use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Http\RedirectResponse;
 
 class PostController extends Controller
 {
@@ -37,10 +38,10 @@ class PostController extends Controller
      */
     public function store(Request $request): string
     {
-        $title = $request->title;
-        $content = $request->content;
-        dd($title, $content);
-        return 'Request to create a posts';
+        $title = $request->input('title');
+        $content = $request->input('content');
+
+        return redirect()->route('user.posts.show', 123);
     }
 
     /**
@@ -81,13 +82,15 @@ class PostController extends Controller
      *
      * @param Request $request
      * @param  int  $id
-     * @return Response
+     * @return RedirectResponse
      */
     public function update(Request $request, $id)
     {
-        $title = $request->title;
-        $content = $request->content;
-        dd($title, $content);
+        $title = $request->input('title');
+        $content = $request->input('content');
+
+//        return redirect()->route('user.posts.show', 123);
+        return redirect()->back();
     }
 
     /**
@@ -103,10 +106,10 @@ class PostController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  int  $id
-     * @return Response
+     * @return RedirectResponse
      */
-    public function destroy($id)
+    public function delete($id): RedirectResponse
     {
-        //
+        return redirect()->route('user.posts');
     }
 }

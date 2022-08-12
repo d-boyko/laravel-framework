@@ -33,7 +33,11 @@ class RegisterController extends Controller
 //        $avatar = $request->file('avatar');
         $agreement = $request->boolean('Remember');
 
-        dd($name, $email, $password, $agreement);
-        return 'Request to registrate';
+//        dd($name, $email, $password, $agreement);
+//        return 'Request to registrate';
+
+        if (true) {
+            return redirect()->back()->withInput();
+        }
     }
 }
