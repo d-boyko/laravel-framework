@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Rules\Phone;
+use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules\Password;
@@ -46,11 +47,11 @@ class ValidationController extends Controller
 //            'delivery' => ['required', 'array', 'size:2'], // ['date' => '2021-10-09', 'time' => '12:30:00']z
 //            'delivery.date' => ['required', 'string', 'date_format:Y.m.d'], // 2021-10-09
 //            'delivery.time' => ['required', 'string', 'date_format:H:i:s'], // 12:30:00
-//            'secret' => ['required', 'string', function ($attribute, $value, \Closure $fail) {
-//                if ($value !== config('example.secret')) {
-//                    $fail(__('Неверный секретный ключ.'));
-//                }
-//            }],
+            'secret' => ['required', 'string', function ($attribute, $value, Closure $fail) {
+                if ($value !== config('example.secret')) {
+                    $fail(__('Wrong secret key.'));
+                }
+            }],
         ]);
 
         dd($validated);
