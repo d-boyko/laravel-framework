@@ -6,8 +6,9 @@ use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Validation\ValidationException;
+use JetBrains\PhpStorm\NoReturn;
 
 class PostController extends Controller
 {
@@ -35,11 +36,37 @@ class PostController extends Controller
      *
      * @param Request $request
      * @return string
+     * @throws ValidationException
      */
-    public function store(Request $request): string
+//    #[NoReturn] public function store(StorePostRequest $request): string
+    #[NoReturn] public function store(Request $request): string
     {
-        $title = $request->input('title');
-        $content = $request->input('content');
+//        $validated = validator($request->all(), [
+//            'title' => ['required', 'string', 'max:100'],
+//            'content' => ['required', 'string', 'max:10000'],
+//        ])->validate();
+
+//        $validated = $request->validate([
+//            'title' => ['required', 'string', 'max:100'],
+//            'content' => ['required', 'string', 'max:10000'],
+//        ]);
+
+//        $validated = $request->validated();
+//        dd($validated);
+//        $title = $request->input('title');
+//        $content = $request->input('content');
+
+        $validated = $this->validate($request, [
+            'title' => ['required', 'string', 'max:100'],
+            'content' => ['required', 'string', 'max:10000'],
+        ]);
+        dd($validated);
+
+//        if (true) {
+//            throw ValidationException::withMessages([
+//                'account' => __('Not enough resources'),
+//            ]);
+//        }
 
         return redirect()->route('user.posts.show', 123);
     }
@@ -47,32 +74,40 @@ class PostController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $post
+     * @param Request $request
+     * @return Application|Factory|View
+     * @throws ValidationException
      */
-    public function show($post)
+    public function show(Request $request)
     {
-        $post = (object) [
-            'id' => 123,
-            'title' => 'Jack\'s thing',
-            'content' => '<strong>Lorem ipsum dolor sit amet, consectetur adipiscing elit. </strong>',
-        ];
-
-        return view('user.posts.show', compact('post'));
+//        $post = (object) [
+//            'id' => 123,
+//            'title' => 'Jack\'s thing',
+//            'content' => '<strong>Lorem ipsum dolor sit amet, consectetur adipiscing elit. </strong>',
+//        ];
+        return view('user.posts.show', compact(123));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param $post
+     * @param Request $request
      * @return Application|Factory|View
+     * @throws ValidationException
      */
-    public function edit($post): View|Factory|Application
+    public function edit(Request $request): View|Factory|Application
     {
         $post = (object) [
             'id' => 123,
             'title' => 'Jack\'s thing',
             'content' => '<strong>Lorem ipsum dolor sit amet, consectetur adipiscing elit. </strong>',
         ];
+
+        $validated = $this->validate($request, [
+            'title' => ['required', 'string', 'max:100'],
+            'content' => ['required', 'string', 'max:10000'],
+        ]);
+        dd($validated);
 
         return view('user.posts.edit', compact('post'));
     }

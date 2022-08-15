@@ -19,3 +19,5 @@
         @endisset
     </div>
 </div>
+
+<x-errors></x-errors>
