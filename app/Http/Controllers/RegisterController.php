@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Jobs\AddUserInfoToUsersTable;
 use Illuminate\Http\Request;
 
 class RegisterController extends Controller
@@ -26,18 +27,17 @@ class RegisterController extends Controller
 
 //        $data = $request->except(['name', 'email']);
 
-        $name = $request->input('name');
+        $name = $request->name;
         $email = $request->email;
         $password = $request->password;
 //        $remember = !! $request->Remember;
 //        $avatar = $request->file('avatar');
-        $agreement = $request->boolean('Remember');
+        $agreement = $request->agreement;
+        $age = $request->age;
 
 //        dd($name, $email, $password, $agreement);
-//        return 'Request to registrate';
+//        return 'Request to registration';
 
-        if (true) {
-            return redirect()->back()->withInput();
-        }
+        AddUserInfoToUsersTable::dispatch($name, $email, $password, $agreement, $age);
     }
 }

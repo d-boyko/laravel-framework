@@ -46,6 +46,10 @@ Route::get('/documentation', function() {
     return view('documentation');
 })->name('documentation');
 
+//Route::get('/', function() {
+//    \App\Jobs\VeryLongJob::dispatch('TEST_MESSAGE');
+//});
+
 Route::fallback(function () {
     return view('home');
 });
