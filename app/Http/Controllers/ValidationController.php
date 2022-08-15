@@ -3,16 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Rules\Phone;
-use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules\Password;
 use Illuminate\Validation\ValidationException;
-use JetBrains\PhpStorm\NoReturn;
 
 class ValidationController extends Controller
 {
-    #[NoReturn] public function store(Request $request)
+    public function store(Request $request)
     {
         $user = $request->user();
 
@@ -32,9 +30,9 @@ class ValidationController extends Controller
             'current_password' => ['required', 'string', 'current_password'], // current password when the user is logged in
             'email' => ['required', 'string', 'max:100', 'email', 'exists:users'], // mail@example.com
 //            'email' => ['required', 'string', 'max:100', 'email', 'exists:users,{field -> default: <-value 'email'}'], // mail@example.com
-            'country_id' => ['required', 'integer', 'exists:countries,id'],
+//            'country_id' => ['required', 'integer', 'exists:countries,id'],
             'country_id' => ['required', 'integer', Rule::exists('countries', 'id')->where('active', true)],
-            'phone' => ['required', 'string', 'unique:users,phone'],
+//            'phone' => ['required', 'string', 'unique:users,phone'],
             'phone' => ['required', 'string', new Phone, Rule::unique('users', 'phone')->ignore($user)],
             'website' => ['nullable', 'string', 'url'], // https://example.com
             'uuid' => ['nullable', 'string', 'uuid'], // sdfsdf-sdfsd-sdfsdf-sdfsdf
@@ -45,14 +43,14 @@ class ValidationController extends Controller
             'end_date' => ['required', 'string', 'data', 'after:start_date'],
             'services' => ['nullable', 'array', 'min:1', 'max:10'], // [1,2,3,4,5]
             'services.*' => ['required', 'integer'], // [1,2,3,4,5]
-            'delivery' => ['required', 'array', 'size:2'], // ['date' => '2021-10-09', 'time' => '12:30:00']
-            'delivery.date' => ['required', 'string', 'date_format:Y.m.d'], // 2021-10-09
-            'delivery.time' => ['required', 'string', 'date_format:H:i:s'], // 12:30:00
-            'secret' => ['required', 'string', function ($attribute, $value, Closure $fail) {
-                if ($value !== config('example.secret')) {
-                    $fail(__('Wrong secret key.'));
-                }
-            }],
+//            'delivery' => ['required', 'array', 'size:2'], // ['date' => '2021-10-09', 'time' => '12:30:00']z
+//            'delivery.date' => ['required', 'string', 'date_format:Y.m.d'], // 2021-10-09
+//            'delivery.time' => ['required', 'string', 'date_format:H:i:s'], // 12:30:00
+//            'secret' => ['required', 'string', function ($attribute, $value, \Closure $fail) {
+//                if ($value !== config('example.secret')) {
+//                    $fail(__('Неверный секретный ключ.'));
+//                }
+//            }],
         ]);
 
         dd($validated);
