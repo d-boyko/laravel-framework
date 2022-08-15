@@ -7,6 +7,7 @@ use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\ValidationException;
 use JetBrains\PhpStorm\NoReturn;
 
@@ -146,5 +147,14 @@ class PostController extends Controller
     public function delete($id): RedirectResponse
     {
         return redirect()->route('user.posts');
+    }
+
+    public function getPosts(): Factory|View|Application
+    {
+        $posts = DB::table('users')
+            ->leftJoin('posts', 'id','=', 'user_id')
+            ->select('users.name as name', 'posts.title as title', 'posts.content as content');
+
+        return view('posts.index', compact('posts'));
     }
 }

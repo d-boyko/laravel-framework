@@ -39,5 +39,6 @@ class RegisterController extends Controller
 //        return 'Request to registration';
 
         AddUserInfoToUsersTable::dispatch($name, $email, $password, $agreement, $age);
+        redirect()->route('user.posts');
     }
 }

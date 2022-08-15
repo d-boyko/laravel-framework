@@ -7,11 +7,11 @@ use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules\Password;
-use Illuminate\Validation\ValidationException;
+use JetBrains\PhpStorm\NoReturn;
 
 class ValidationController extends Controller
 {
-    public function store(Request $request)
+    #[NoReturn] public function store(Request $request)
     {
         $user = $request->user();
 

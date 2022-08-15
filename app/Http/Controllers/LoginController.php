@@ -39,8 +39,8 @@ class LoginController extends Controller
         $session = app()->make('session');
         dd($session);
 
-        if (true) {
-            return redirect()->back()->withInput();
-        }
+//        if (true) {
+//            return redirect()->back()->withInput();
+//        }
     }
 }

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\BlogController;
-use App\Http\Controllers\TestController;
+use App\Http\Controllers\PostController;
 
 /*
 |--------------------------------------------------------------------------
@@ -45,6 +45,9 @@ Route::get('/about', function() {
 Route::get('/documentation', function() {
     return view('documentation');
 })->name('documentation');
+
+Route::get('/posts/list', [PostController::class, 'getPosts'])
+->name('posts.list');
 
 //Route::get('/', function() {
 //    \App\Jobs\VeryLongJob::dispatch('TEST_MESSAGE');
