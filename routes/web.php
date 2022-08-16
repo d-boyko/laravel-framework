@@ -5,6 +5,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -51,7 +52,7 @@ Route::get('/posts/list', [PostController::class, 'getPosts'])
 //    \App\Jobs\VeryLongJob::dispatch('TEST_MESSAGE');
 //});
 
-Route::get('/users/test/models', [\App\Http\Controllers\UserController::class, 'test']);
+Route::get('/users/test/models', [UserController::class, 'test']);
 
 Route::fallback(function () {
     return view('home');
