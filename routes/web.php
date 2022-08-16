@@ -51,6 +51,8 @@ Route::get('/posts/list', [PostController::class, 'getPosts'])
 //    \App\Jobs\VeryLongJob::dispatch('TEST_MESSAGE');
 //});
 
+Route::get('/users/test/models', [\App\Http\Controllers\UserController::class, 'test']);
+
 Route::fallback(function () {
     return view('home');
 });

@@ -20,6 +20,36 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
+//    If the table is non-standard
+//    protected $table = 'users';
+
+//    If the primary key is non-standard than 'id'
+//    protected $primaryKey = 'user_id';
+
+//    If the primary key is not auto-incrementing integer type
+//    public $incrementing = false;
+
+//    If the primary key is not integer
+//    protected $keyType = 'string';
+
+//    If you don't want Laravel to change created_at and updated_at automatically
+//    public $timestamps = false;
+
+//    If you want to change date format of created_at and updated_at fields
+//    protected $dateFormat = 'U';
+
+//    If you want to change names of created_at and updated_at fields
+//    CONST CREATED_AT = 'creation_date';
+//    CONST UPDATED_AT = 'updated_date';
+
+//    If you want to change standard connection to DB (.env)
+//    protected $connection = 'sqlite';
+
+//    Standard values of some fields
+//    protected $attributes = [
+//        'name' => null,
+//    ];
+
     /**
      * The attributes that are mass assignable.
      *
