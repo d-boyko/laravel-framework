@@ -23,8 +23,6 @@ Route::get('/', function() {
     return view('home.index');
 })->name('home');
 
-Route::get('/test', [TestController::class, 'index'])->name('test.index');
-
 Route::get('/login', [LoginController::class, 'index'])->name('login');
 Route::post('/login', [LoginController::class, 'store'])->name('login.store');
 
