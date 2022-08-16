@@ -81,12 +81,12 @@ class PostController extends Controller
      */
     public function show(Request $request)
     {
-//        $post = (object) [
-//            'id' => 123,
-//            'title' => 'Jack\'s thing',
-//            'content' => '<strong>Lorem ipsum dolor sit amet, consectetur adipiscing elit. </strong>',
-//        ];
-        return view('user.posts.show', compact(123));
+        $post = (object) [
+            'id' => 123,
+            'title' => 'Jack\'s thing',
+            'content' => '<strong>Lorem ipsum dolor sit amet, consectetur adipiscing elit. </strong>',
+        ];
+        return view('user.posts.show', compact('post'));
     }
 
     /**

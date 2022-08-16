@@ -33,12 +33,11 @@ class RegisterController extends Controller
 //        $remember = !! $request->Remember;
 //        $avatar = $request->file('avatar');
         $agreement = $request->agreement;
-        $age = $request->age;
+        $age = $request->number;
 
 //        dd($name, $email, $password, $agreement);
 //        return 'Request to registration';
 
         AddUserInfoToUsersTable::dispatch($name, $email, $password, $agreement, $age);
-        redirect()->route('user.posts');
     }
 }

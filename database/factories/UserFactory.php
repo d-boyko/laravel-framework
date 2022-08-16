@@ -25,7 +25,7 @@ class UserFactory extends Factory
             'agreement'         => fake()->boolean,
             'remember_token'    => Str::uuid(),
             'is_active'         => fake()->boolean,
-            'is_admin'          => false,
+            'is_admin'          => fake()->boolean(5),
             'age'               => fake()->numberBetween(0, 100),
         ];
     }

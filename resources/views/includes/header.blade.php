@@ -49,12 +49,6 @@
                         {{ __('Users') }}
                     </a>
                 </li>
-
-                <li class="nav-item">
-                    <a href="{{ route('posts.list') }}" class="nav-link {{ \Illuminate\Support\Facades\Route::is('posts.list') ? 'active' : '' }}" aria-current="page">
-                        {{ __('Posts') }}
-                    </a>
-                </li>
             </ul>
         </div>
     </div>

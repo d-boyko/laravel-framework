@@ -33,18 +33,6 @@ Route::post('/register', [RegisterController::class, 'store'])->name('register.s
 Route::get('/blog', [BlogController::class, 'index'])->name('blog');
 Route::get('/blog/{posts}', [BlogController::class, 'show'])->name('blog.show');
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->name('dashboard');
-
-Route::get('/about', function() {
-    return view('about');
-})->name('about');
-
-Route::get('/documentation', function() {
-    return view('documentation');
-})->name('documentation');
-
 Route::get('/posts/list', [PostController::class, 'getPosts'])
 ->name('posts.list');
 
@@ -55,5 +43,5 @@ Route::get('/posts/list', [PostController::class, 'getPosts'])
 Route::get('/users/test/models', [UserController::class, 'test']);
 
 Route::fallback(function () {
-    return view('home');
+    return view('home.index');
 });
