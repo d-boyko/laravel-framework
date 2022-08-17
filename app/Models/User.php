@@ -3,8 +3,11 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Scopes\UserScope;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Prunable;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
@@ -19,7 +22,7 @@ use Laravel\Sanctum\HasApiTokens;
  */
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens, HasFactory, Notifiable, SoftDeletes, Prunable;
 
 //    If the table is non-standard
 //    protected $table = 'users';
@@ -61,7 +64,8 @@ class User extends Authenticatable
         'email',
         'password',
         'is_active',
-        'avatar',
+        'is_admin',
+        'age',
     ];
 
     /**
@@ -79,4 +83,35 @@ class User extends Authenticatable
 //        return $this->hasMany(Post::class);
         return $this->hasMany(Post::class, 'user_id');
     }
+
+    /**
+     * Get the prunable model query.
+     *
+     * @return User
+     */
+    public function prunable(): User
+    {
+        return static::where('created_at', '<=', now()->subMonth());
+    }
+
+    /**
+     * When we want to delete something else after deleting some model.
+     *
+     * @return void
+        public function pruning()
+        {
+        }
+     */
+
+    /**
+     * Method "booted" of the model.
+     * app/Models/UserScope.php
+     *
+     * @return void
+
+        protected static function booted()
+        {
+            static::addGlobalScope(new UserScope());
+        }
+     */
 }
