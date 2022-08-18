@@ -33,12 +33,7 @@ Route::post('/register', [RegisterController::class, 'store'])->name('register.s
 Route::get('/blog', [BlogController::class, 'index'])->name('blog');
 Route::get('/blog/{posts}', [BlogController::class, 'show'])->name('blog.show');
 
-Route::get('/posts/list', [PostController::class, 'getPosts'])
-->name('posts.list');
-
-//Route::get('/', function() {
-//    \App\Jobs\VeryLongJob::dispatch('TEST_MESSAGE');
-//});
+Route::get('/posts/list', [PostController::class, 'getPosts'])->name('posts.list');
 
 Route::get('/users/test/models', [UserController::class, 'test']);
 

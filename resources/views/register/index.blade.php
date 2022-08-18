@@ -24,6 +24,7 @@
 
                                 <x-card-body>
                                     <x-form action="{{ route('register.store') }}" method="POST">
+                                        @csrf
                                         <div class="card-body">
 
                                             <x-form-item>
@@ -79,7 +80,7 @@
                                             </x-form-item>
 
                                             <x-button type="submit">
-                                                {{ __('Login') }}
+                                                {{ __('Register') }}
                                             </x-button>
 
                                         </div>

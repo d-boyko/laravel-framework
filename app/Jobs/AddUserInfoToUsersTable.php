@@ -2,13 +2,12 @@
 
 namespace App\Jobs;
 
+use App\Models\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Str;
 
 class AddUserInfoToUsersTable implements ShouldQueue
 {
@@ -36,20 +35,15 @@ class AddUserInfoToUsersTable implements ShouldQueue
 
     /**
      * Execute the job.
-     *
-     * @return void
      */
-    public function handle(): void
+    public function handle()
     {
-        DB::table('users')->insert([
+        User::create([
             'name' => $this->name,
             'email' => $this->email,
             'password' => $this->password,
             'agreement' => $this->agreement,
             'age' => $this->age,
-            'created_at' => now(),
-            'updated_at' => now(),
-            'remember_token' => Str::uuid(),
         ]);
     }
 }
