@@ -69,7 +69,7 @@
                                                         {{ __('Age') }}
                                                     </x-label>
 {{--                                                    <x-input name="age" value="{{ request()->old('age') }}"></x-input>--}}
-                                                    <x-input name="number"></x-input>
+                                                    <x-input name="age"></x-input>
                                                 </div>
                                             </x-form-item>
 

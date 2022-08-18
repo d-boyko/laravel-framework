@@ -3,9 +3,10 @@
 </p>
 
 <p>
-    Email: {{ $data['email'] }}
+    E-mail: {{ $data['email'] }}
 </p>
 
 <p>
     Password: {{ $data['password'] }}
 </p>
+
