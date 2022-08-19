@@ -4,7 +4,6 @@ use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 
-// Route::prefix('user')->middleware('auth', 'active')->group(function () {
 Route::prefix('user')->group(function () {
     Route::redirect('/', '/user/posts')->name('user');
 
@@ -17,7 +16,6 @@ Route::prefix('user')->group(function () {
     Route::delete('posts/{posts}', [PostController::class, 'delete'])->name('user.posts.delete');
     Route::put('posts/{posts}/like', [PostController::class, 'like'])->name('user.posts.like');
 });
-
 
 Route::prefix('user-model')->group(function() {
     Route::get('create-after-soft-delete', [UserController::class, 'createAfterSoftDelete'])->name('user.create-after-soft-delete');

@@ -18,8 +18,6 @@ use App\Http\Controllers\UserController;
 |
 */
 
-//Route::view('/', 'home.index')->name('home');
-
 Route::get('/', function() {
     return view('home.index');
 })->name('home');

@@ -75,11 +75,10 @@ class PostController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param Request $request
      * @return Application|Factory|View
      * @throws ValidationException
      */
-    public function show(Request $request)
+    public function show()
     {
         $post = (object) [
             'id' => 123,
@@ -120,12 +119,8 @@ class PostController extends Controller
      * @param  int  $id
      * @return RedirectResponse
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        $title = $request->input('title');
-        $content = $request->input('content');
-
-//        return redirect()->route('user.posts.show', 123);
         return redirect()->back();
     }
 
@@ -135,16 +130,14 @@ class PostController extends Controller
      */
     public function like($id): void
     {
-
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
      * @return RedirectResponse
      */
-    public function delete($id): RedirectResponse
+    public function delete(): RedirectResponse
     {
         return redirect()->route('user.posts');
     }

@@ -1,13 +1,11 @@
 <?php
 
-// DONE
 namespace App\Http\Controllers;
 
 use App\Models\Post;
 use App\Models\User;
 use Exception;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 use Illuminate\View\Factory;
 use Illuminate\View\View;
@@ -74,7 +72,6 @@ class UserController extends Controller
         $user = User::all()->first();
         $user->name = 'SXOPE Inc.';
         echo $user->name;
-//        $user->refresh();
         dd($user);
     }
 

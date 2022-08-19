@@ -22,8 +22,6 @@ class ValidationController extends Controller
             'amount' => ['required', 'numeric', 'min:1', 'max:10000000'], // 123 OR 123.45
             'gender' => ['nullable', 'string', 'in:male,female'],
             'zip' => ['required', 'digits:6'], // 123456
-            // php artisan tinker
-            // validate(['zip' => 123456], ['zip' => 'digits:6'])
             'subscription' => ['nullable', 'boolean'], // true/false/1/0
             'agreement' => ['accepted'], // true/1/yes
 //            'password' => ['required', 'string', 'min:7', 'confirmed'], // password_confirmation

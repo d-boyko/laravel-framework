@@ -12,8 +12,6 @@ class BlogController extends Controller
         $search = $request->search;
         $category_id = $request->category_id;
 
-//        dd($search, $category_id);
-
         $post = (object) [
             'id' => 123,
             'title' => 'Jack\'s thing',
@@ -35,26 +33,10 @@ class BlogController extends Controller
             return true;
         });
 
-//        return view('blog.index')
-//            ->with('foo', 'bar')
-//            ->with('baz', [1,2,3]);
-
-//        return view('blog.index', [
-//                'foo' => 'bar',
-//                'posts' => $posts,
-//                'baz' => [1,2,3]
-//            ]
-//        );
-
-//        return view('blog.index', [
-//                'foo' => $posts,
-//                ]
-//        );
-
         return view('blog.index', compact('posts'));
     }
 
-    public function show($post)
+    public function show()
     {
         $post = (object) [
             'id' => 123,

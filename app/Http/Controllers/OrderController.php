@@ -16,7 +16,7 @@ class OrderController extends Controller
         return view('orders.index', compact('list'));
     }
 
-    public function getCurrentOrder($id)
+    public function getCurrentOrder()
     {
         $id = (object)[
             'number' => 3241,

@@ -6,6 +6,7 @@ use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
+use JetBrains\PhpStorm\NoReturn;
 
 class LoginController extends Controller
 {
@@ -17,30 +18,9 @@ class LoginController extends Controller
         return view('login.index');
     }
 
-    public function store(Request $request)
+    #[NoReturn] public function store()
     {
-//        $ip = $request->ip();
-//        $path = $request->path();
-//        $url = $request->url();
-//        $fullUrl = $request->fullUrl();
-//
-//        dd($ip, $path, $url, $fullUrl);
-//
-//        $email = $request->email;
-//        $password = $request->password;
-//        $agreement = $request->boolean('Remember');
-//
-//        dd($email, $password, $agreement);
-
-//        return response('Request to login');
-
-//        return response()->redirectTo('/foo');
-//        return response()->redirectToRoute('user');
         $session = app()->make('session');
         dd($session);
-
-//        if (true) {
-//            return redirect()->back()->withInput();
-//        }
     }
 }

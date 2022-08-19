@@ -1,0 +1,104 @@
+    // php artisan tinker
+    // new Currency
+    // $currency = Currency::first()
+    // $currency
+    // $currency->toArray()
+    // $currency->toJson()
+    // (string) $currency
+    // $currency->id
+    // $currency->name
+//    protected $table = 'another_table_name';
+//    protected $primaryKey = 'another_then_id_field';
+
+
+//        return view('blog.index')
+//            ->with('foo', 'bar')
+//            ->with('baz', [1,2,3]);
+
+//        return view('blog.index', [
+//                'foo' => 'bar',
+//                'posts' => $posts,
+//                'baz' => [1,2,3]
+//            ]
+//        );
+
+//        return view('blog.index', [
+//                'foo' => $posts,
+//                ]
+//        );
+
+//    public function index(): Factory|View|Application
+//    {
+//        return app('view')->make('login.index');
+//        return view()->make('login.index');
+//        return \Illuminate\Support\Facades\View::make('login.index');
+//        return view('login.index');
+//     }
+
+//    public function store(Request $request)
+//    {
+//        $ip = $request->ip();
+//        $path = $request->path();
+//        $url = $request->url();
+//        $fullUrl = $request->fullUrl();
+//
+//        dd($ip, $path, $url, $fullUrl);
+//
+//        $email = $request->email;
+//        $password = $request->password;
+//        $agreement = $request->boolean('Remember');
+//
+//        dd($email, $password, $agreement);
+
+//        return response('Request to login');
+
+//        return response()->redirectTo('/foo');
+//        return response()->redirectToRoute('user');
+//        $session = app()->make('session');
+//        dd($session);
+
+//        if (true) {
+//            return redirect()->back()->withInput();
+//        }
+//    }
+
+//    #[NoReturn] public function store(Request $request): string
+//    {
+//        $validated = validator($request->all(), [
+//            'title' => ['required', 'string', 'max:100'],
+//            'content' => ['required', 'string', 'max:10000'],
+//        ])->validate();
+
+//        $validated = $request->validate([
+//            'title' => ['required', 'string', 'max:100'],
+//            'content' => ['required', 'string', 'max:10000'],
+//        ]);
+
+//        $validated = $request->validated();
+//        dd($validated);
+//        $title = $request->input('title');
+//        $content = $request->input('content');
+
+        $validated = $this->validate($request, [
+            'title' => ['required', 'string', 'max:100'],
+            'content' => ['required', 'string', 'max:10000'],
+        ]);
+        dd($validated);
+
+//        if (true) {
+//            throw ValidationException::withMessages([
+//                'account' => __('Not enough resources'),
+//            ]);
+//        }
+
+//         return redirect()->route('user.posts.show', 123);
+//      }
+
+#[NoReturn] public function refreshUsersInfo()
+    {
+        $user = User::all()->first();
+        $user->name = 'SXOPE Inc.';
+        echo $user->name;
+//        $user->refresh();
+        dd($user);
+    }
