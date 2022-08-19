@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Events\CreateUserEvent;
+use App\Http\Requests\RegisterProcess\UserRegistrationRequest;
 use App\Jobs\AddUserInfoToUsersTable;
-use Illuminate\Http\Request;
 use JetBrains\PhpStorm\NoReturn;
 
 class RegisterController extends Controller
@@ -14,16 +14,8 @@ class RegisterController extends Controller
         return view('register.index');
     }
 
-    #[NoReturn] public function store(Request $request)
+    #[NoReturn] public function store(UserRegistrationRequest $request)
     {
-        validator($request->all(), [
-            'name' => ['required', 'string', 'max:50'],
-            'email' => ['required', 'email', 'max:100'],
-            'password' => ['required', 'string'],
-            'agreement' => ['accepted'],
-            'age' => ['required', 'integer', 'max:100'],
-        ])->validate();
-
         $userInfo = [
             'name' => $request->name,
             'email' => $request->email,
@@ -32,7 +24,6 @@ class RegisterController extends Controller
             'age' => $request->age,
         ];
 
-        event(new CreateUserEvent($userInfo));
 
         AddUserInfoToUsersTable::dispatch(
             $userInfo['name'],
@@ -41,6 +32,7 @@ class RegisterController extends Controller
             $userInfo['agreement'],
             $userInfo['age'],
         );
+        event(new CreateUserEvent($userInfo));
 
         return redirect(route('home'));
     }
