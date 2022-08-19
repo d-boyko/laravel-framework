@@ -2,8 +2,10 @@
 
 namespace App\Providers;
 
-use App\Events\UserCrudEvent;
+use App\Events\CreateUserEvent;
+use App\Events\UpdateUserEvent;
 use App\Listeners\NewUserEmailNotification;
+use App\Listeners\UpdateUserInfoNotification;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -19,8 +21,11 @@ class EventServiceProvider extends ServiceProvider
         Registered::class => [
             SendEmailVerificationNotification::class,
         ],
-        UserCrudEvent::class => [
+        CreateUserEvent::class => [
             NewUserEmailNotification::class,
+        ],
+        UpdateUserEvent::class => [
+            UpdateUserInfoNotification::class,
         ],
     ];
 

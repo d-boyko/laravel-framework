@@ -2,26 +2,26 @@
 
 namespace App\Mail;
 
+use App\Models\User;
 use Illuminate\Bus\Queueable;
+use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class RegisterMail extends Mailable
+class UpdateUserMail extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public array $data;
+    public array $parameters;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($name, $email, $password)
+    public function __construct($parameters)
     {
-        $this->data['name'] = $name;
-        $this->data['email'] = $email;
-        $this->data['password'] = $password;
+        $this->parameters = $parameters;
     }
 
     /**
@@ -32,7 +32,7 @@ class RegisterMail extends Mailable
     public function build(): static
     {
         return $this->from('boyko.d.a@yandex.ru', 'INFO: New User')
-            ->view('email.create-user-mail')
-            ->with($this->data);
+            ->view('email.update-user-email')
+            ->with($this->parameters);
     }
 }

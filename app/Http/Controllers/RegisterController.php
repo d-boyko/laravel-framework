@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Events\UserCrudEvent;
+use App\Events\CreateUserEvent;
 use App\Jobs\AddUserInfoToUsersTable;
 use Illuminate\Http\Request;
 use JetBrains\PhpStorm\NoReturn;
@@ -32,7 +32,7 @@ class RegisterController extends Controller
             'age' => $request->age,
         ];
 
-        event(new UserCrudEvent($userInfo));
+        event(new CreateUserEvent($userInfo));
 
         AddUserInfoToUsersTable::dispatch(
             $userInfo['name'],

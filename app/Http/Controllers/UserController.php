@@ -2,6 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\CreateUserEvent;
+use App\Events\UpdateUserEvent;
+use App\Http\Requests\UpdateForm;
+use App\Jobs\UpdateUserInfoInUsersTable;
 use App\Models\Post;
 use App\Models\User;
 use Exception;
@@ -399,5 +403,19 @@ class UserController extends Controller
         $replicating->save();
 
         dd($replicating);
+    }
+
+    public function update($id, $field, $newValue)
+    {
+        $userInfo = [
+            'id' => $id,
+            'field' => $field,
+            'newValue' => $newValue,
+        ];
+
+        UpdateUserInfoInUsersTable::dispatch($userInfo);
+        event(new UpdateUserEvent($userInfo));
+
+        return redirect(route('user.list'));
     }
 }

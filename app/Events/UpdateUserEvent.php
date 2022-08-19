@@ -2,12 +2,11 @@
 
 namespace App\Events;
 
-use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class UserCrudEvent
+class UpdateUserEvent
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
@@ -22,15 +21,4 @@ class UserCrudEvent
     {
         $this->userInfo = $userInfo;
     }
-
-    /**
-     * Get the channels the event should broadcast on.
-     *
-     * @return Channel|array
-
-        public function broadcastOn()
-        {
-            return new PrivateChannel('channel-name');
-        }
-     */
 }
