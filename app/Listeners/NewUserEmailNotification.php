@@ -2,9 +2,8 @@
 
 namespace App\Listeners;
 
-use App\Events\UserRegistrationEvent;
+use App\Events\UserCrudEvent;
 use App\Mail\RegisterMail;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 
 class NewUserEmailNotification
@@ -12,12 +11,11 @@ class NewUserEmailNotification
     /**
      * Handle the event.
      *
-     * @param  UserRegistrationEvent  $event
+     * @param  UserCrudEvent  $event
      * @return void
      */
-    public function handle(UserRegistrationEvent $event): void
+    public function handle(UserCrudEvent $event): void
     {
-        Log::debug('new user has been registered');
         Mail::to('boyko.d.a@yandex.ru')->send(new RegisterMail(
             $event->userInfo['name'],
             $event->userInfo['email'],
