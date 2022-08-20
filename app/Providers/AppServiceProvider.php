@@ -2,8 +2,10 @@
 
 namespace App\Providers;
 
+use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
+use Psy\Util\Json;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -22,11 +24,17 @@ class AppServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot()
+    public function boot(): void
     {
         View::share('date', '2022');
         View::composer('user*', function($view) {
             $view->with('balance', 12345);
         });
+
+        // If we don't want to add 'data' or any other word into json output
+//        JsonResource::withoutWrapping();
+
+        // If we want to add standard work
+//        JsonResource::wrap('word');
     }
 }

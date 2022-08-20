@@ -13,15 +13,7 @@
                 Posts
             </h1>
             @foreach($posts as $row)
-                <div>
-                    Name: {{ $row->name }}
-                    <br>
-                    Email: {{ $row->title }}
-                    <br>
-                    Password: {{ $row->content }}
-                </div>
-                <br>
-                <br>
+                $row
             @endforeach
 
         @endif
