@@ -4,10 +4,18 @@ namespace App\Providers;
 
 use App\Events\CreateUserEvent;
 use App\Events\ForgotPasswordEvent;
+use App\Events\UnknownPostUserIdEvent;
 use App\Events\UpdateUserEvent;
 use App\Listeners\ForgotPasswordNotification;
 use App\Listeners\NewUserEmailNotification;
+use App\Listeners\SendEmailAboutUnknownPostCreating;
 use App\Listeners\UpdateUserInfoNotification;
+use App\Models\Post;
+use App\Models\User;
+use App\Models\Version;
+use App\Observers\PostObserver;
+use App\Observers\UserObserver;
+use App\Observers\VersionObserver;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -32,6 +40,9 @@ class EventServiceProvider extends ServiceProvider
         ForgotPasswordEvent::class => [
             ForgotPasswordNotification::class,
         ],
+        UnknownPostUserIdEvent::class => [
+            SendEmailAboutUnknownPostCreating::class,
+        ],
     ];
 
     /**
@@ -41,7 +52,9 @@ class EventServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-
+        Version::observe(VersionObserver::class);
+        User::observe(UserObserver::class);
+        Post::observe(PostObserver::class);
     }
 
     /**

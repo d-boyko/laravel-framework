@@ -24,9 +24,13 @@ class PostController extends Controller
     }
 
 
-    public function create(Request $request): Factory|View|Application
+    public function create()
     {
-        return view('user.posts.create');
+        Post::create([
+            'user_id' => 100000,
+            'title' => 'Test creating title',
+            'content' => 'Test creating content'
+        ]);
     }
 
     /**
@@ -100,11 +104,10 @@ class PostController extends Controller
             'content' => '<strong>Lorem ipsum dolor sit amet, consectetur adipiscing elit. </strong>',
         ];
 
-        $validated = $this->validate($request, [
+        $this->validate($request, [
             'title' => ['required', 'string', 'max:100'],
             'content' => ['required', 'string', 'max:10000'],
         ]);
-        dd($validated);
 
         return view('user.posts.edit', compact('post'));
     }

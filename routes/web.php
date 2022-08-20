@@ -44,6 +44,7 @@ Route::get('/blog', [BlogController::class, 'index'])->name('blog');
 Route::get('/blog/{posts}', [BlogController::class, 'show'])->name('blog.show');
 
 Route::get('/posts/list', [PostController::class, 'getPosts'])->name('posts.list');
+Route::get('/posts/create/', [PostController::class, 'create'])->name('posts.create');
 
 Route::get('/users/test/models', [UserController::class, 'test']);
 
