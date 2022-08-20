@@ -7,11 +7,11 @@
         {{ __('List of posts') }}
     </x-title>
 
-    @if(empty($posts))
+    @if(empty($response))
         {{ __('There are no posts.') }}
     @else
         <div class="row">
-            @foreach($posts as $post)
+            @foreach($response as $post)
                 <div class="col-12 col-md-4">
                     <x-card>
                         <x-card-body>

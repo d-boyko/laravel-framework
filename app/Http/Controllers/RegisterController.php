@@ -2,14 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use App\Events\CreateUserEvent;
-use App\Http\Requests\RegisterProcess\UserRegistrationRequest;
 use App\Models\User;
+use App\Events\CreateUserEvent;
+use App\Http\Requests\RegistrationProcess\UserRegistrationRequest;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\Auth;
-use JetBrains\PhpStorm\NoReturn;
 
 class RegisterController extends Controller
 {
+    /**
+     * @return Application|Factory|View|RedirectResponse|Redirector
+     */
     public function index()
     {
         if (Auth::check()) {
@@ -18,16 +25,12 @@ class RegisterController extends Controller
         return view('register.index');
     }
 
-    #[NoReturn] public function store(UserRegistrationRequest $request)
+    /**
+     * @param UserRegistrationRequest $request
+     * @return Application|RedirectResponse|Redirector
+     */
+    public function store(UserRegistrationRequest $request)
     {
-        if (Auth::check()) {
-            return redirect(route('private-page'));
-        }
-
-        if (User::where(column: 'email', operator: '=', value: $request->email)->exists()) {
-            return redirect(route('home'));
-        };
-
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,

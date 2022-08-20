@@ -22,6 +22,15 @@
         </x-card-header>
 
         <x-card-body>
+            @if($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
             <x-form action="{{ route('register.store') }}" method="POST">
                 @csrf
                 <div class="card-body">
@@ -31,6 +40,9 @@
                                 {{ __('Email') }}
                             </x-label>
                             <x-input name="email" autofocus></x-input>
+{{--                            @error('email')--}}
+{{--                                <div class="alert alert-danger">{{ $message }}</div>--}}
+{{--                            @enderror--}}
                         </div>
                     </x-form-item>
 
@@ -40,6 +52,9 @@
                                 {{ __('Name') }}
                             </x-label>
                             <x-input name="name"></x-input>
+{{--                            @error('name')--}}
+{{--                                <div class="alert alert-danger">{{ $message }}</div>--}}
+{{--                            @enderror--}}
                         </div>
                     </x-form-item>
 
@@ -49,6 +64,9 @@
                                 {{ __('Password') }}
                             </x-label>
                             <x-input name="password"></x-input>
+{{--                            @error('password', 'mixed')--}}
+{{--                                <div class="alert alert-danger">{{ $message }}</div>--}}
+{{--                            @enderror--}}
                         </div>
                     </x-form-item>
 
@@ -58,6 +76,9 @@
                                 {{ __('Confirm password') }}
                             </x-label>
                             <x-input name="password_confirmation"></x-input>
+{{--                            @error('confirmed')--}}
+{{--                                <div class="alert alert-danger">{{ $message }}</div>--}}
+{{--                            @enderror--}}
                         </div>
                     </x-form-item>
 

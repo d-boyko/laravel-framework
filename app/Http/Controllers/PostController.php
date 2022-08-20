@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Post;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -13,17 +14,13 @@ use JetBrains\PhpStorm\NoReturn;
 
 class PostController extends Controller
 {
-    public function index(): Factory|View|Application
+    /**
+     * @return Application|Factory|View
+     */
+    public function index(): Application|Factory|View
     {
-        $post = (object) [
-            'id' => 123,
-            'title' => 'Jack\'s thing',
-            'content' => '<strong>Lorem ipsum dolor sit amet, consectetur adipiscing elit. </strong>',
-        ];
-
-        $posts = array_fill(0, 10, $post);
-
-        return view('user.posts.index', compact('posts'));
+        $response = Post::all();
+        return view('blog.index', compact('response'));
     }
 
 

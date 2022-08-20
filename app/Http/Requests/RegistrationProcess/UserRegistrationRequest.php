@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Http\Requests\RegisterProcess;
+namespace App\Http\Requests\RegistrationProcess;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
 
 /**
  * @property $name
@@ -18,7 +19,7 @@ class UserRegistrationRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return true;
+        return !Auth::check();
     }
 
     /**
@@ -30,7 +31,7 @@ class UserRegistrationRequest extends FormRequest
     {
         return [
             'name' => ['required', 'string', 'max:50'],
-            'email' => ['required', 'email', 'max:100'],
+            'email' => ['required', 'email', 'unique:users,email', 'max:100'],
             'password' => ['required', 'string'],
         ];
     }

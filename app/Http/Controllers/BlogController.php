@@ -2,47 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Models\Post;
 
 class BlogController extends Controller
 {
-    public function index(Request $request)
+    public function index()
     {
-
-        $search = $request->search;
-        $category_id = $request->category_id;
-
-        $post = (object) [
-            'id' => 123,
-            'title' => 'Jack\'s thing',
-            'content' => '<strong>Lorem ipsum dolor sit amet, consectetur adipiscing elit. </strong>',
-            'category_id' => 1
-        ];
-
-        $posts = array_fill(0, 10, $post);
-
-        $posts = array_filter($posts, function($post) use ($search, $category_id) {
-            if ($search && ! str_contains($post->title, $search)) {
-                return false;
-            }
-
-            if ($category_id && $post->category_id != $category_id) {
-                return true;
-            }
-
-            return true;
-        });
-
-        return view('blog.index', compact('posts'));
+        $response = Post::all();
+        return view('blog.index', compact('response'));
     }
 
-    public function show()
+    public function show($id)
     {
-        $post = (object) [
-            'id' => 123,
-            'title' => 'Jack\'s thing',
-            'content' => '<strong>Lorem ipsum dolor sit amet, consectetur adipiscing elit. </strong>',
-        ];
+        $post = Post::find($id);
 
         return view('blog.show', compact('post'));
     }

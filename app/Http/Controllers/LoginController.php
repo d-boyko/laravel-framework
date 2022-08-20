@@ -9,7 +9,6 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\Auth;
-use JetBrains\PhpStorm\NoReturn;
 
 class LoginController extends Controller
 {
@@ -24,7 +23,11 @@ class LoginController extends Controller
         return view('login.index');
     }
 
-    #[NoReturn] public function store(Request $request)
+    /**
+     * @param Request $request
+     * @return Application|RedirectResponse|Redirector
+     */
+    public function store(Request $request)
     {
         if (Auth::check()) {
             return redirect(route('private-page'));
