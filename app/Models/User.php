@@ -14,12 +14,7 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
 /**
- * @property string $name
- * @property string $email
- * @property string $password
- * @property boolean $status
- * @property string $member_hash
- * @property string $user_hash
+ * App\Models\User
  */
 class User extends Authenticatable implements MustVerifyEmail
 {
@@ -64,9 +59,6 @@ class User extends Authenticatable implements MustVerifyEmail
         'name',
         'email',
         'password',
-        'is_active',
-        'is_admin',
-        'age',
     ];
 
     /**
@@ -81,7 +73,6 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function post(): HasMany
     {
-//        return $this->hasMany(Post::class);
         return $this->hasMany(Post::class, 'user_id');
     }
 

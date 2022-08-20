@@ -6,6 +6,7 @@ use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\ForgotPasswordController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,6 +28,9 @@ Route::post('/login', [LoginController::class, 'store'])->name('login.store');
 
 Route::get('/register', [RegisterController::class, 'index'])->name('register');
 Route::post('/register', [RegisterController::class, 'store'])->name('register.store');
+
+Route::get('/forgot-password', [ForgotPasswordController::class, 'index'])->name('forgot-password');
+Route::post('/forgot-password', [ForgotPasswordController::class, 'store'])->name('forgot-password.store');
 
 Route::get('/blog', [BlogController::class, 'index'])->name('blog');
 Route::get('/blog/{posts}', [BlogController::class, 'show'])->name('blog.show');

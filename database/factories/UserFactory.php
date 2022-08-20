@@ -22,11 +22,9 @@ class UserFactory extends Factory
             'name'              => fake()->name(),
             'email'             => fake()->safeEmail(),
             'password'          => Str::random(15),
-            'agreement'         => fake()->boolean,
             'remember_token'    => Str::uuid(),
             'is_active'         => fake()->boolean,
             'is_admin'          => fake()->boolean(5),
-            'age'               => fake()->numberBetween(0, 100),
         ];
     }
 }

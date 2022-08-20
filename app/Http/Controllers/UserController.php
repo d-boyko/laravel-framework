@@ -397,7 +397,6 @@ class UserController extends Controller
 
         $replicating = $user->replicate()->fill([
             'email' => 'some_new_email_after_replicating@sxope.com',
-            'is_admin',
         ]);
 
         $replicating->save();
@@ -413,7 +412,7 @@ class UserController extends Controller
             'newValue' => $newValue,
         ];
 
-        UpdateUserInfoInUsersTable::dispatch($userInfo);
+        dispatch(new UpdateUserInfoInUsersTable($userInfo));
         event(new UpdateUserEvent($userInfo));
 
         return redirect(route('user.list'));

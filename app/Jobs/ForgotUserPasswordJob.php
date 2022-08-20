@@ -8,33 +8,33 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Support\Str;
 
-class AddUserInfoToUsersTable implements ShouldQueue
+class ForgotUserPasswordJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
-    protected array $userInfo;
+    protected string $email;
+    protected string $password;
 
     /**
      * Create a new job instance.
      *
      * @return void
      */
-    public function __construct($userInfo)
+    public function __construct($email, $password)
     {
-        $this->userInfo = $userInfo;
+        $this->email = $email;
+        $this->password = $password;
     }
 
     /**
      * Execute the job.
+     *
+     * @return void
      */
-    public function handle()
+    public function handle(): void
     {
-        User::create([
-            'name' => $this->userInfo['name'],
-            'email' => $this->userInfo['email'],
-            'password' => $this->userInfo['password'],
-        ]);
+        User::where('email', '=', $this->email)
+            ->update(['password' => $this->password]);
     }
 }

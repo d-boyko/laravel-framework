@@ -3,7 +3,9 @@
 namespace App\Providers;
 
 use App\Events\CreateUserEvent;
+use App\Events\ForgotPasswordEvent;
 use App\Events\UpdateUserEvent;
+use App\Listeners\ForgotPasswordNotification;
 use App\Listeners\NewUserEmailNotification;
 use App\Listeners\UpdateUserInfoNotification;
 use Illuminate\Auth\Events\Registered;
@@ -26,6 +28,9 @@ class EventServiceProvider extends ServiceProvider
         ],
         UpdateUserEvent::class => [
             UpdateUserInfoNotification::class,
+        ],
+        ForgotPasswordEvent::class => [
+            ForgotPasswordNotification::class,
         ],
     ];
 

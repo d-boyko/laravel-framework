@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Events\CreateUserEvent;
 use App\Http\Requests\RegisterProcess\UserRegistrationRequest;
 use App\Jobs\AddUserInfoToUsersTable;
+use App\Models\User;
+use Illuminate\Support\Str;
 use JetBrains\PhpStorm\NoReturn;
 
 class RegisterController extends Controller
@@ -16,22 +18,8 @@ class RegisterController extends Controller
 
     #[NoReturn] public function store(UserRegistrationRequest $request)
     {
-        $userInfo = [
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => $request->password,
-            'agreement' => $request->agreement,
-            'age' => $request->age,
-        ];
-
-
-        AddUserInfoToUsersTable::dispatch(
-            $userInfo['name'],
-            $userInfo['email'],
-            $userInfo['password'],
-            $userInfo['agreement'],
-            $userInfo['age'],
-        );
+        $userInfo = $request->all();
+        dispatch(new AddUserInfoToUsersTable($userInfo));
         event(new CreateUserEvent($userInfo));
 
         return redirect(route('home'));

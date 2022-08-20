@@ -54,6 +54,10 @@
                             {{ __('Login') }}
                         </x-button>
 
+                        <x-button-link href="{{ route('forgot-password') }}">
+                            {{ __('Forgot password?') }}
+                        </x-button-link>
+
                     </div>
                 </x-form>
             </x-card-body>

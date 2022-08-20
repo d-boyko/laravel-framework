@@ -1,17 +1,17 @@
 <?php
 
-namespace App\Http\Requests\RegisterProcess;
+namespace App\Http\Requests\ForgotPasswordProcess;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UserRegistrationRequest extends FormRequest
+class ForgotPasswordRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      *
      * @return bool
      */
-    public function authorize(): bool
+    public function authorize()
     {
         return true;
     }
@@ -24,9 +24,7 @@ class UserRegistrationRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['required', 'string', 'max:50'],
-            'email' => ['required', 'email', 'max:100'],
-            'password' => ['required', 'string'],
+            'email' => ['required', 'exists:users,email']
         ];
     }
 }

@@ -8,7 +8,7 @@
     <title>@yield('page.title', config('app.name'))</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.2.0/css/bootstrap.min.css">
     <style>
-        .container { max-width:720px; margin: 0 auto}
+        .container { margin: 0 auto}
         .required:before { content: '*'; color: red; }
     </style>
 </head>
