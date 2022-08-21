@@ -258,7 +258,7 @@ class UserController extends Controller
         );
     }
 
-    public function isUserModelChanged()
+    #[NoReturn] public function isUserModelChanged()
     {
         $user = User::create([
             'name' => 'TestWasChanged',
@@ -353,7 +353,6 @@ class UserController extends Controller
 
     #[NoReturn] public function createAfterSoftDelete()
     {
-        // Deleted_at will mark as NULL
         $user = User::withTrashed()
             ->where('email', '=', 'wilson20@example.org')
             ->restore();

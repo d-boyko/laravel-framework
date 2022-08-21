@@ -2,10 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Actions\GetLoggedInUserInfoAction;
 use App\Actions\RegisterUserAction;
-use App\Models\User;
-use App\Events\CreateUserEvent;
 use App\Http\Requests\RegistrationProcess\UserRegistrationRequest;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;

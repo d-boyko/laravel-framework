@@ -4,7 +4,6 @@ namespace App\Actions;
 
 use App\Events\CreateUserEvent;
 use App\Http\Requests\RegistrationProcess\UserRegistrationRequest;
-use App\Jobs\AddUserInfoToUsersTable;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 

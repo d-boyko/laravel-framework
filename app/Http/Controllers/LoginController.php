@@ -2,12 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Actions\GetLoggedInUserInfoAction;
 use App\Http\Requests\LoginProcess\UserLoginRequest;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
-use Illuminate\Http\Client\Request;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\Auth;
