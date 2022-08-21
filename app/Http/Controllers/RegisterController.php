@@ -17,11 +17,11 @@ class RegisterController extends Controller
     /**
      * @return Application|Factory|View
      */
-    public function index(GetLoggedInUserInfoAction $action)
+    public function index()
     {
         if (Auth::check()) {
             return view('user.private-page', [
-                'data' => $action->handle(),
+                'data' => Auth::user(),
             ]);
         }
         return view('register.index');
