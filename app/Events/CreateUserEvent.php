@@ -12,7 +12,7 @@ class CreateUserEvent
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    public User $userInfo;
+    public array $userInfo;
 
     /**
      * Create a new event instance.

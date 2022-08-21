@@ -2,29 +2,32 @@
 
 namespace App\Http\Controllers;
 
+use App\Actions\GetLoggedInUserInfoAction;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
+use Illuminate\Http\Client\Request;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
     /**
+     * @param GetLoggedInUserInfoAction $action
      * @return Application|Factory|View|RedirectResponse|Redirector
      */
-    public function index(): Application|Factory|View|RedirectResponse|Redirector
+    public function index(GetLoggedInUserInfoAction $action): Application|Factory|View|RedirectResponse|Redirector
     {
         if (Auth::check()) {
-            return redirect(route('private-page'));
+            return view('user.private-page', [
+                'data' => $action->handle(),
+            ]);
         }
         return view('login.index');
     }
 
     /**
-     * @param Request $request
      * @return Application|RedirectResponse|Redirector
      */
     public function store(Request $request)

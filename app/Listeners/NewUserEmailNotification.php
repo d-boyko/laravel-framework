@@ -17,9 +17,7 @@ class NewUserEmailNotification
     public function handle(CreateUserEvent $event): void
     {
         Mail::to('boyko.d.a@yandex.ru')->send(new RegisterMail(
-            $event->userInfo->name,
-            $event->userInfo->email,
-            $event->userInfo->password,
+            $event->userInfo
         ));
     }
 }

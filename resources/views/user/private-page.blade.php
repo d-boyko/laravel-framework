@@ -8,6 +8,9 @@
     <title>Private Page</title>
 </head>
 <body>
+    {{ $data->name }}
+    {{ $data->email }}
+    {{ $data->password }}
     <x-button-link href="{{ route('logout') }}"> {{ __('Logout') }}</x-button-link>
 </body>
 </html>

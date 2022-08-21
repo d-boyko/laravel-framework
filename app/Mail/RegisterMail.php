@@ -17,11 +17,9 @@ class RegisterMail extends Mailable
      *
      * @return void
      */
-    public function __construct($name, $email, $password)
+    public function __construct($data)
     {
-        $this->data['name'] = $name;
-        $this->data['email'] = $email;
-        $this->data['password'] = $password;
+        $this->data = $data;
     }
 
     /**
