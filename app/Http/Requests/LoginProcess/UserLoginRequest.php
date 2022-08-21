@@ -3,6 +3,7 @@
 namespace App\Http\Requests\LoginProcess;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
 
 class UserLoginRequest extends FormRequest
 {
@@ -11,9 +12,9 @@ class UserLoginRequest extends FormRequest
      *
      * @return bool
      */
-    public function authorize()
+    public function authorize(): bool
     {
-        return true;
+        return !Auth::check();
     }
 
     /**
