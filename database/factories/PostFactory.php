@@ -2,11 +2,12 @@
 
 namespace Database\Factories;
 
+use App\Models\Post;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Post>
+ * @extends Factory<Post>
  */
 class PostFactory extends Factory
 {
@@ -18,7 +19,7 @@ class PostFactory extends Factory
     public function definition(): array
     {
         return [
-            'user_id' => fake()->numberBetween(1, 30),
+            'user_id' => fake()->numberBetween(1, 650),
             'title' => Str::random(10),
             'content' => Str::random(100),
             'is_published' => fake()->boolean(70),

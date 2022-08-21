@@ -30,6 +30,10 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('users.list') }}" tabindex="-1" aria-disabled="true">{{ __('Users') }}</a>
                 </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('admin.functions') }}" tabindex="-1" aria-disabled="true">{{ __('AdminMode') }}</a>
+                </li>
             </ul>
         </div>
     </div>

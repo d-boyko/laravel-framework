@@ -49,5 +49,5 @@ Route::get('/posts/create/', [PostController::class, 'create'])->name('posts.cre
 Route::get('/users/test/models', [UserController::class, 'test']);
 
 Route::fallback(function () {
-    return view('home.index');
+    return redirect(route('home'));
 });
