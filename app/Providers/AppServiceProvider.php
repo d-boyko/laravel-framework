@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Actions\RegisterUserAction;
+use App\Contracts\RegisterActionContract;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
@@ -14,9 +16,9 @@ class AppServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function register()
+    public function register(): void
     {
-        //
+//        $this->app->bind(RegisterActionContract::class, RegisterUserAction::class);
     }
 
     /**

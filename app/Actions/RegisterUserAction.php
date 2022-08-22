@@ -2,25 +2,24 @@
 
 namespace App\Actions;
 
-use App\Events\CreateUserEvent;
+use App\Contracts\RegisterActionContract;
 use App\Http\Requests\RegistrationProcess\UserRegistrationRequest;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
-class RegisterUserAction
+class RegisterUserAction implements RegisterActionContract
 {
     /**
      * @param UserRegistrationRequest $request
      * @return UserRegistrationRequest
      */
-    public static function handle(UserRegistrationRequest $request): UserRegistrationRequest
+    public function handle(UserRegistrationRequest $request): UserRegistrationRequest
     {
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => $request->password,
         ]);
-        event(new CreateUserEvent($request->all()));
         Auth::login($user);
 
         return $request;

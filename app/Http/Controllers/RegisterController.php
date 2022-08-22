@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Actions\RegisterUserAction;
+use App\Actions\RegisterGroupAction;
 use App\Http\Requests\RegistrationProcess\UserRegistrationRequest;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
@@ -26,10 +26,10 @@ class RegisterController extends Controller
 
     /**
      * @param UserRegistrationRequest $request
-     * @param RegisterUserAction $action
+     * @param RegisterGroupAction $action
      * @return Application
      */
-    public function store(UserRegistrationRequest $request, RegisterUserAction $action)
+    public function store(UserRegistrationRequest $request, RegisterGroupAction $action)
     {
         return view('user.private-page', [
             'data' => $action->handle($request),
