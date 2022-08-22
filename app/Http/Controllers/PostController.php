@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Actions\CreatePostAction;
 use App\Models\Post;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
@@ -24,13 +25,9 @@ class PostController extends Controller
     }
 
 
-    public function create()
+    public function create(CreatePostAction $action)
     {
-        Post::create([
-            'user_id' => 100000,
-            'title' => 'Test creating title',
-            'content' => 'Test creating content'
-        ]);
+        $action->handle();
     }
 
     /**
