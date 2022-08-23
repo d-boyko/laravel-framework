@@ -15,15 +15,20 @@
     </h1>
 </div>
 
-<x-button href="{{ route('csv-users-export') }}">
-    {{ __('Export Users table') }}
-</x-button>
+<ul class="navbar-nav">
 
-<br>
+    <li class="nav-item">
+        <a class="nav-link active" aria-current="page" href="{{ route('csv-users-export') }}">{{ __('Export Users table') }}</a>
+    </li>
 
-<x-button href="{{ route('csv-posts-export') }}">
-    {{ __('Export Posts table') }}
-</x-button>
+    <li class="nav-item">
+        <a class="nav-link" href="{{ route('csv-posts-export') }}" tabindex="-1" aria-disabled="true">{{ __('Export Posts table') }}</a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link" href="{{ route('admin.update-user') }}" tabindex="-1" aria-disabled="true">{{ __('Update user information') }}</a>
+    </li>
+</ul>
 
 </body>
 </html>

@@ -31,7 +31,7 @@ class UpdateUserMail extends Mailable
      */
     public function build(): static
     {
-        return $this->from('boyko.d.a@yandex.ru', 'INFO: New User')
+        return $this->from('boyko.d.a@yandex.ru', 'INFO: User was updated')
             ->view('email.update-user-email')
             ->with($this->parameters);
     }

@@ -2,11 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Actions\UpdateUserGroupAction;
 use App\Jobs\ExportCsvPostsTable;
 use App\Jobs\ExportCsvUsersTable;
 use App\Models\User;
 use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Illuminate\Routing\Redirector;
 
 class AdminController extends Controller
@@ -49,5 +53,24 @@ class AdminController extends Controller
         ExportCsvPostsTable::dispatch();
 
         return redirect(route('users.list'));
+    }
+
+    /**
+     * @return Application|Factory|View
+     */
+    public function updateUserView(): Application|Factory|View
+    {
+        return view('admin.update-user');
+    }
+
+    /**
+     * @param Request $request
+     * @param UpdateUserGroupAction $action
+     * @return Application|RedirectResponse|Redirector
+     */
+    public function updateUser(Request $request, UpdateUserGroupAction $action): Application|RedirectResponse|Redirector
+    {
+        $action->handle($request);
+        return redirect(route('admin.functions'));
     }
 }

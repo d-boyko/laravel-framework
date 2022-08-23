@@ -2,6 +2,7 @@
 
 namespace App\Jobs;
 
+use App\Actions\UpdateUserAction;
 use App\Models\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -28,11 +29,10 @@ class UpdateUserInfoInUsersTable implements ShouldQueue
     /**
      * Execute the job.
      *
+     * @param UpdateUserAction $action
      * @return void
      */
-    public function handle(): void
+    public function handle(UpdateUserAction $action): void
     {
-        User::where('id', '=', $this->parameters['id'])
-            ->update([$this->parameters['field'] => $this->parameters['newValue']]);
     }
 }

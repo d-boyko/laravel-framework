@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Actions\GetLoggedInUserInfoAction;
+use App\Actions\UpdateUserGroupAction;
 use App\Events\UpdateUserEvent;
 use App\Jobs\UpdateUserInfoInUsersTable;
 use App\Models\Post;
@@ -412,19 +413,5 @@ class UserController extends Controller
         $replicating->save();
 
         dd($replicating);
-    }
-
-    public function update($id, $field, $newValue)
-    {
-        $userInfo = [
-            'id' => $id,
-            'field' => $field,
-            'newValue' => $newValue,
-        ];
-
-        dispatch(new UpdateUserInfoInUsersTable($userInfo));
-        event(new UpdateUserEvent($userInfo));
-
-        return redirect(route('user.list'));
     }
 }

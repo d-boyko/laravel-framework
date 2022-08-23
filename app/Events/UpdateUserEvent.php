@@ -10,7 +10,7 @@ class UpdateUserEvent
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    public array $userInfo;
+    public array $user;
 
     /**
      * Create a new event instance.
@@ -19,6 +19,6 @@ class UpdateUserEvent
      */
     public function __construct($userInfo)
     {
-        $this->userInfo = $userInfo;
+        $this->user = $userInfo;
     }
 }

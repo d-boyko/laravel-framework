@@ -2,7 +2,6 @@
 
 namespace App\Listeners;
 
-use App\Events\CreateUserEvent;
 use App\Events\UpdateUserEvent;
 use App\Mail\UpdateUserMail;
 use Illuminate\Support\Facades\Mail;
@@ -18,7 +17,7 @@ class UpdateUserInfoNotification
     public function handle(UpdateUserEvent $event): void
     {
         Mail::to('boyko.d.a@yandex.ru')->send(new UpdateUserMail(
-            $event->userInfo,
+            $event->user,
         ));
     }
 }

@@ -8,19 +8,15 @@
             <ul class="navbar-nav">
 
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="{{ route('home') }}">Main page</a>
+                    <a class="nav-link active" aria-current="page" href="{{ route('home') }}">{{ __('Main page') }}</a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('posts.list') }}"></a>
+                    <a class="nav-link" href="{{ route('register') }}" tabindex="-1" aria-disabled="true">{{ __('Registration') }}</a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('register') }}" tabindex="-1" aria-disabled="true">Registration</a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('login') }}" tabindex="-1" aria-disabled="true">Login</a>
+                    <a class="nav-link" href="{{ route('login') }}" tabindex="-1" aria-disabled="true">{{ __('Login') }}</a>
                 </li>
 
                 <li class="nav-item">
