@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Actions\ExportDatabaseTables;
 use App\Actions\GetLoggedInUserInfoAction;
 use App\Actions\UpdateUserGroupAction;
 use App\Events\UpdateUserEvent;
@@ -413,5 +414,10 @@ class UserController extends Controller
         $replicating->save();
 
         dd($replicating);
+    }
+
+    public function testCsv(ExportDatabaseTables $databaseTables)
+    {
+        $databaseTables->handle();
     }
 }

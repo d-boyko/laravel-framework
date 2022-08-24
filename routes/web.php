@@ -48,6 +48,8 @@ Route::get('/posts/create/', [PostController::class, 'create'])->name('posts.cre
 
 Route::get('/users/test/models', [UserController::class, 'test']);
 
+Route::get('/test-export', [UserController::class, 'testCsv'])->name('test-csv');
+
 Route::fallback(function () {
     return redirect(route('home'));
 });

@@ -16,16 +16,6 @@ class ExportCsvUsersTable implements ShouldQueue
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
     /**
-     * Create a new job instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        //
-    }
-
-    /**
      * Execute the job.
      *
      */
@@ -35,7 +25,15 @@ class ExportCsvUsersTable implements ShouldQueue
         $fileName = 'users_table.csv';
 
         $handle = fopen($fileName, 'w+');
-        fputcsv($handle, array('id', 'created_at', 'name', 'password', 'email', 'is_active', 'is_admin'));
+        fputcsv($handle, array(
+            'id',
+            'created_at',
+            'name',
+            'password',
+            'email',
+            'is_active',
+            'is_admin'
+        ));
 
         foreach ($users as $row) {
             fputcsv($handle, array(
@@ -46,7 +44,7 @@ class ExportCsvUsersTable implements ShouldQueue
                 $row['email'],
                 $row['is_active'],
                 $row['is_admin']
-                ));
+            ));
         }
 
         fclose($handle);
