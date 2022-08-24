@@ -1,14 +1,18 @@
 # Laravel Framework Documentation
 was made according to self-improvement spreadsheet
 
------------------------------------------------------------------------------------------------------------
-Routes:
------------------------------------------------------------------------------------------------------------
+Рекомендую курсы:
+Max Orlov - Laravel
+Cutcode - Laravel
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                                                  Routes
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 Пример route с callback функцией:
-Route::get('/hello', function() {
-    return 'Hello World';
-});
-Следовательно, после перехода в браузере на url: 127.0.0.1:8000/hello - мы увидим надпись Hello Work
+    Route::get('/hello', function() {
+        return 'Hello World';
+    });
+Следовательно, после перехода в браузере на url: 127.0.0.1:8000/hello - мы увидим надпись Hello World
 
 По умолчанию все routes находятся в файле routes/web.php
 Мы можем зарегистрировать новый файл в RouteServiceProvider.php
@@ -22,12 +26,12 @@ Route::get('/hello', function() {
 
 -----------------------------------------------------------------------------------------------------------
 Routes types:
-Route::get('url', 'function');
-Route::post('url', 'function');
-Route::put('url', 'function');
-Route::patch('url', 'function');
-Route::delete('url', 'function');
-Route::options('url', 'function');
+    Route::get('url', 'function');
+    Route::post('url', 'function');
+    Route::put('url', 'function');
+    Route::patch('url', 'function');
+    Route::delete('url', 'function');
+    Route::options('url', 'function');
 -----------------------------------------------------------------------------------------------------------
 GET метод позволяет получить все то, что нельзя никак отредактировать, добавить, удалить и так далее (к примеру HTML странички)
 POST - может использоваться также для редактирования ресурса
@@ -138,7 +142,7 @@ Route::name('name_of_the_prefix.')->group(function() {
     Route:: -> name('some_name_3');
 });
 Тогда мы сможем получить доступ к этим маршрутам:
-route('name_of_the_prefix.name_of_the_route');
+    route('name_of_the_prefix.name_of_the_route');
 
 -----------------------------------------------------------------------------------------------------------
 Глобальные ограничения
@@ -189,3 +193,75 @@ route('name_of_the_prefix.name_of_the_route');
 
 Чтобы очистить кэш маршрутов:
     php artisan route:clear
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                                                Controllers
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Готовьтесь к тому, что вы будете переносить свою логику из callback функций в рутах, в контроллеры,
+а потом из controllers в jobs, а потом из jobs в action классы, потому что так - ОПТИМИЗИРОВАННЕЕ! syka..
+На моей личной практике я рефакторил весь проект уже 5 раз, по мере изучения Laravel.
+
+Чтобы создать контроллер, используем:
+    php artisan make:controller <NameController>
+Хранятся они в каталоге app/Http/Controllers
+По рекомендациям разработчиков laravel лучше создавать контроллеры со словом "Controller" в конце названия
+UserController, AdminController
+
+В контроллерах мы можем писать методы, которые будут исполняться, когда пользователь будет переходить по какому-то route.
+Посмотрите файл RegisterController.php
+
+Чтобы определить метод, который будет исполняться при переходе по руту, в самом объявлении рута пишем:
+    Route::get('/url', [ControllerClass::class, 'name_of_the_method'])->name('some_name');
+
+Т.е. когда входящий запрос будет совпадать с указанном URL, будет вызван метод 'name_of_the_method' контроллера 'ControllerClass',
+также параметры маршрута будут переданы методу
+Пример route с параметрами
+    Route::get('/url/{id}', [Controller::class, 'name_of_the_method'])->name('some_name');
+
+Тогда в методе в классе контроллера будем передавать этот 'id'
+    public function name_of_the_method($id)
+    {
+        return $id;
+    }
+
+Контроллеры одиночного действия - это контроллеры, в которых есть только 1 магический метод - __invoke
+Помним из ООП, __invoke - magic method. Он будет исполнен, если не будет найден ни один подходящий метод
+Тогда как зарегистрировать этот метод в route? Очень просто, его вообще указывать не нужно
+    Route::post('/url', ControllerClass:: class)->name('some_name');
+
+Чтобы сразу сгенерировать контроллер одиночного действия, нужно просто написать:
+    php artisan make:controller NameController --invokable
+
+Ресурсный контроллер - это контроллер, у которого есть все основные методы, отвечающие на GET, PUT, POST.. запросы
+Чтобы создать такой контроллер, используем:
+    php artisan make:controller NameController --resource
+
+Можно зарегистрировать ресурсный route, используя:
+    Route::resource('/url', NameController::class);
+
+Пока не напишешь говно-код, не поймешь что такое говно-код. © Daniil Boyko
+К чему я это? А к тому, что можно и объявлять несколько ресурсных контроллеров сразу
+    Route::resources([
+        '/photos' => PhotoController::class,
+        '/posts' => PostController::class,
+    ]);
+Но это bad pattern, никогда так не делайте, иначе при удалении какого-либо из методов в одном из этих контроллеров,
+придется вытягивать это из массива, переписывать руты
+
+Действия, выполняемые ресурсными контроллерами
+Метод	        URI	               Действие	        Имя маршрута
+GET	        /photos	                index	        photos.index
+GET	        /photos/create	        create	        photos.create
+POST	    /photos	                store	        photos.store
+GET	        /photos/{photo}	        show	        photos.show
+GET	        /photos/{photo}/edit	edit	        photos.edit
+PUT/PATCH	/photos/{photo}	        update	        photos.update
+DELETE	    /photos/{photo}	        destroy	        photos.destroy
+
+Никто не ограничивает вас в том, чтобы добавить новые методы в ресурсный или какой-либо другой контроллер
+Точно также
+1) Добавляем метод в контроллер, пишем логику в методе
+2) Добавляем его в рутах и все
+
+Там дальше идет взаимодействие с service container и eloquent моделями, но пока, как я понимаю,
+это темный лес, поэтому пока закончу на этом свой рассказ
