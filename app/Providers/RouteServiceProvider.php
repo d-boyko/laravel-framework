@@ -40,6 +40,8 @@ class RouteServiceProvider extends ServiceProvider
                     require base_path('routes/user.php');
                 });
         });
+
+//        Route::pattern('id', '[0-9]+');
     }
 
     /**
