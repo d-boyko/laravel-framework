@@ -5,6 +5,11 @@ was made according to self-improvement spreadsheet
 Max Orlov - Laravel
 Cutcode - Laravel
 
+Routes - 10 row
+Controllers - 202 row
+Middlewares - 290 row
+Views - 404 row
+
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
                                                   Routes
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
