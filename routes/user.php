@@ -58,7 +58,6 @@ Route::name('user.')->group(function() {
 
         Route::get('is-dirty-or-clean', [UserController::class, 'isUserDirtyOrClean'])->name('clean-or-dirty-user-is');
         Route::get('is-model-changed', [UserController::class, 'isUserModelChanged'])->name('changed-model-user-is');
-
-        Route::get('/map-collection', [UserController::class, 'testMapCollection'])->name('test-map-collection');
+        Route::get('is-test-subquery', [UserController::class, 'testSubQueries'])->name('is-test-subquery');
     });
 });
