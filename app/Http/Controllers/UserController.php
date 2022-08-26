@@ -420,4 +420,40 @@ class UserController extends Controller
     {
         $databaseTables->handle();
     }
+
+    public function testMapCollection()
+    {
+        $users = User::all();
+        $isContainID = $users->contains(1);
+        $isContainID = $users->contains(99999999);
+//        dd($isContainID);
+
+        $diff = $users->diff(User::whereIn('id', [1,2,3])->get());
+//        dd($diff);
+
+        $except = $users->except([1,2,3]);
+//        dd($except);
+
+        $find = $users->find(1);
+//        dd($find);
+
+        $intersect = $users->intersect(User::whereIn('id', [1,2,3])->get());
+//        dd($intersect);
+
+        // with loading dependencies with method post is User model
+        $load = $users->load(['post']);
+//        dd($load);
+
+        $modelKeys = $users->modelKeys();
+//        dd($modelKeys);
+
+        $condition = User::where('is_active', '=', true)
+            ->get();
+
+        $newUsers = $condition->toQuery()->update([
+            'name' => 'SXOPE Inc.'
+        ]);
+
+//        dd($newUsers);
+    }
 }
