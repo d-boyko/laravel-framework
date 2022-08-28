@@ -4,9 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Actions\ExportDatabaseTables;
 use App\Actions\GetLoggedInUserInfoAction;
-use App\Actions\UpdateUserGroupAction;
-use App\Events\UpdateUserEvent;
-use App\Jobs\UpdateUserInfoInUsersTable;
 use App\Models\Post;
 use App\Models\User;
 use Exception;
@@ -423,7 +420,7 @@ class UserController extends Controller
 
     public function testSubQueries()
     {
-        $query = User::select('name', 'password', 'email')
+        $query = User::select(['name', 'password', 'email'])
             ->orderByDesc(
                 Post::select('is_published')
                     ->whereColumn('user_id', 'users.id')
