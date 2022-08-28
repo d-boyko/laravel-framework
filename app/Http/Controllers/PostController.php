@@ -141,10 +141,7 @@ class PostController extends Controller
 
     public function getPosts(): Factory|View|Application
     {
-        $posts = DB::table('users')
-            ->leftJoin('posts', 'id','=', 'user_id')
-            ->select('users.name as name', 'posts.title as title', 'posts.content as content');
-
+        $posts = Post::getCachedTable();
         return view('posts.index', compact('posts'));
     }
 }

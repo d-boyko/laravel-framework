@@ -34,14 +34,16 @@ class AdminController extends Controller
 
     public function listOfUsers()
     {
-        $response = User::all();
-        return view('user.index', compact('response'));
+        $response = User::getCachedTable();
+        return view('user.index')
+            ->with(['response' => $response]);
     }
 
     public function showUser($id)
     {
         $response = User::find($id);
-        return view('user.show', compact('response'));
+        return view('user.show')
+            ->with('response', $response);
     }
 
     /**

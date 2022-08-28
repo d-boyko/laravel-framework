@@ -2,12 +2,15 @@
 
 namespace App\Models;
 
+use App\Events\CacheUsersTableEvent;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Prunable;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Laravel\Sanctum\HasApiTokens;
 
@@ -17,6 +20,8 @@ use Laravel\Sanctum\HasApiTokens;
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable, SoftDeletes, Prunable;
+
+    const CACHE_TIMEOUT = 60;
 
 //    If the table is non-standard
 //    protected $table = 'users';
@@ -117,11 +122,24 @@ class User extends Authenticatable
      * Method "booted" of the model.
      * app/Models/UserScope.php
      *
-     * @return void
+//     * @return void
 
         protected static function booted()
         {
             static::addGlobalScope(new UserScope());
         }
      */
+
+    public static function getCachedTable()
+    {
+        $key = static::class . '-' . now()->format('d.m.Y');
+        $result = Cache::get($key, false);
+
+        if (!$result) {
+            $result = User::all();
+            Cache::put($key, $result);
+        }
+
+        return $result;
+    }
 }

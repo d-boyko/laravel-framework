@@ -3,18 +3,22 @@
 namespace App\Observers;
 
 use App\Models\User;
+use Illuminate\Support\Facades\Cache;
 
 class UserObserver
 {
     /**
      * Handle the User "created" event.
      *
-     * @param User $user
      * @return void
      */
-    public function created(User $user): void
+    public function created(): void
     {
+        $data = User::all();
+        $key = User::class . '-' . now()->format('d.m.Y');
 
+        Cache::forget($key);
+        Cache::put($key, $data);
     }
 
     /**

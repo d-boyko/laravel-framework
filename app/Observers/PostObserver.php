@@ -5,6 +5,8 @@ namespace App\Observers;
 use App\Events\UnknownPostUserIdEvent;
 use App\Models\Post;
 use App\Models\User;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\DB;
 
 class PostObserver
 {
@@ -22,12 +24,17 @@ class PostObserver
     /**
      * Handle the Post "created" event.
      *
-     * @param Post $post
      * @return void
      */
-    public function created(Post $post): void
+    public function created(): void
     {
-        //
+        $data = DB::table('users')
+            ->leftJoin('posts', 'id','=', 'user_id')
+            ->select('users.name as name', 'posts.title as title', 'posts.content as content');
+        $key = Post::class . '-' . now()->format('d.m.Y');
+
+        Cache::forget($key);
+        Cache::put($key, $data);
     }
 
     /**
