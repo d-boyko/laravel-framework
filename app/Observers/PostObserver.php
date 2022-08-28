@@ -6,7 +6,6 @@ use App\Events\UnknownPostUserIdEvent;
 use App\Models\Post;
 use App\Models\User;
 use Illuminate\Support\Facades\Cache;
-use Illuminate\Support\Facades\DB;
 
 class PostObserver
 {
@@ -41,7 +40,7 @@ class PostObserver
      * @param Post $post
      * @return void
      */
-    public function updated(Post $post)
+    public function updated(Post $post): void
     {
         //
     }
@@ -52,7 +51,7 @@ class PostObserver
      * @param Post $post
      * @return void
      */
-    public function deleted(Post $post)
+    public function deleted(Post $post): void
     {
         //
     }
@@ -63,7 +62,7 @@ class PostObserver
      * @param Post $post
      * @return void
      */
-    public function restored(Post $post)
+    public function restored(Post $post): void
     {
         //
     }
@@ -74,7 +73,7 @@ class PostObserver
      * @param Post $post
      * @return void
      */
-    public function forceDeleted(Post $post)
+    public function forceDeleted(Post $post): void
     {
         //
     }

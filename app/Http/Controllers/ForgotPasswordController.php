@@ -16,7 +16,7 @@ class ForgotPasswordController extends Controller
 
     public function store(ForgotPasswordRequest $request)
     {
-        $email = $request->email;
+        $email = $request->input('email');
         $password = Str::random(10);
         dispatch(new ForgotUserPasswordJob($email, $password));
         event(new ForgotPasswordEvent($email, $password));

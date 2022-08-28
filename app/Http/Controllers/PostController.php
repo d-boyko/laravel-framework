@@ -9,7 +9,6 @@ use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\ValidationException;
 use JetBrains\PhpStorm\NoReturn;
 
@@ -67,7 +66,7 @@ class PostController extends Controller
 //            ]);
 //        }
 
-        return redirect()->route('user.posts.show', 123);
+//        return redirect()->route('user.posts.show', 123);
     }
 
     /**
@@ -112,10 +111,9 @@ class PostController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param Request $request
      * @return RedirectResponse
      */
-    public function update(Request $request)
+    public function update()
     {
         return redirect()->back();
     }

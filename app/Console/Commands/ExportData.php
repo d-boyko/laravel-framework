@@ -23,8 +23,7 @@ class ExportData extends Command
 
     /**
      * Execute the console command.
-     *
-     * @return int
+     * @param ExportDatabaseTables $action
      */
     public function handle(ExportDatabaseTables $action)
     {

@@ -38,7 +38,7 @@ class UserObserver
      * @param User $user
      * @return void
      */
-    public function deleted(User $user)
+    public function deleted(User $user): void
     {
         //
     }
@@ -49,7 +49,7 @@ class UserObserver
      * @param User $user
      * @return void
      */
-    public function restored(User $user)
+    public function restored(User $user): void
     {
         //
     }
@@ -60,7 +60,7 @@ class UserObserver
      * @param User $user
      * @return void
      */
-    public function forceDeleted(User $user)
+    public function forceDeleted(User $user): void
     {
         //
     }

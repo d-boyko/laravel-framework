@@ -175,7 +175,7 @@ class UserController extends Controller
 
         if (gettype($users) == 'array') {
             foreach ($users as $user) {
-                $user->name;
+                echo $user->name;
             }
         }
         else {
@@ -417,7 +417,7 @@ class UserController extends Controller
         $databaseTables->handle();
     }
 
-    public function testSubQueries()
+    #[NoReturn] public function testSubQueries()
     {
         $query = User::select(['name', 'password', 'email'])
             ->orderByDesc(

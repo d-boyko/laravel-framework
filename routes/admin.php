@@ -23,5 +23,6 @@ Route::prefix('admin')->group(function() {
         Route::get('/menu/export-csv/posts', [AdminController::class, 'exportPostsCsv'])->name('csv-posts-export');
         Route::get('/menu/update-user/', [AdminController::class, 'updateUserView'])->name('admin.update-user');
         Route::post('/menu/update-user/', [AdminController::class, 'updateUser'])->name('admin.update-user-edit');
+        Route::get('/menu/export-csv/', [AdminController::class, 'exportCsv'])->name('admin.csv-export');
     });
 });
