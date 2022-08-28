@@ -11,8 +11,8 @@ Controllers - 417 row
 Middlewares - 504 row
 Views - 617 row
 Models - 713 row
-Service Provider -
-
+Service Provider - 1157
+Jobs, Queue - 1338
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
                                            App structure
@@ -224,6 +224,182 @@ package.json {
 phpunit.xml {
     Параметры для тестирования
 }
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Artisan console
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Artisan это не имя таксиста, это Laravel, детка. © Daniil Boyko
+
+-----------------------------------------------------------------------------------------------------------
+Базовые понятия
+-----------------------------------------------------------------------------------------------------------
+Artisan - интерфейс командной строки, входящий в состав Laravel.
+Для просмотра всех действующих команд:
+    php artisan list
+
+Каждая команда включает в себя экран "справки", где отображены документы и параметры команды. Используем:
+    php artisan help migrate
+
+Laravel Tinker - мощный REPL для фреймворка Laravel. Что такое REPL? Read, Eval, Print, Loop.
+Он и так установлен в Laravel по умолчанию, но если мало ли он удален:
+Чтобы установить Tinker:
+    composer require laravel/tinker
+
+Теперь поговорим о том как этим пользоваться. Чтобы запустить:
+    php artisan tinker
+
+Честно, я не особо пользовался Laravel Tinker, но возможно это удобный инструмент для начала разработки проекта.
+
+Конфигурационный файл tinker может быть опубликован командой:
+    php artisan vendor:publish --provider="Laravel\Tinker\TinkerServiceProvider"
+
+-----------------------------------------------------------------------------------------------------------
+Custom commands
+-----------------------------------------------------------------------------------------------------------
+Можно создавать кастомные команды. Например, в sxope-ocean это pipeline:run, либо bq_to_spanner, send_flush_cache и другие.
+Чтобы создать кастомную команду:
+    php artisan make:commands SendEmails
+
+После создания команды следует заполнить свойства $signature - это слова по которым команда будет запускать (bq_to_spanner:load, pipeline:run),
+а также свойство $description - краткое описание команды.
+
+По умолчанию, при вызове этой команды будет исполняться метод handle(). С помощью service-container, Laravel внедрит все необходимые зависимости,
+типы которых объявлены в этом методе:
+    namespace App\Console\Commands;
+
+    use App\Models\User;
+    use App\Support\DripEmailer;
+    use Illuminate\Console\Command;
+
+    class SendEmails extends Command
+    {
+        /**
+         * Имя и сигнатура консольной команды.
+         *
+         * @var string
+         */
+        protected $signature = 'mail:send {user}';
+
+        /**
+         * Описание консольной команды.
+         *
+         * @var string
+         */
+        protected $description = 'Send a marketing email to a user';
+
+        /**
+         * Создать новый экземпляр команды.
+         *
+         * @return void
+         */
+        public function __construct()
+        {
+            parent::__construct();
+        }
+
+        /**
+         * Выполнить консольную команду.
+         *
+         * @param  \App\Support\DripEmailer  $drip
+         * @return mixed
+         */
+        public function handle(DripEmailer $drip)
+        {
+            $drip->send(User::find($this->argument('user')));
+        }
+    }
+
+Хорошей практикой является делать максимально простые консольные команды с делегированием своих задач службам приложения.
+Дальше пойдут Action classes, туда надо помещать всю основную логику, но об этом потом. Пока ради практики можете помещать логику прям в handle().
+
+-----------------------------------------------------------------------------------------------------------
+Анонимные команды
+-----------------------------------------------------------------------------------------------------------
+В рамках метода commands() файла App/Console/Kernel.php Laravel загружал файл routes/console.php.
+    /**
+     * Зарегистрировать команды, основанные на анонимных функциях.
+     *
+     * @return void
+     */
+    protected function commands()
+    {
+        require base_path('routes/console.php');
+    }
+Далее можно определить все анонимные консольные команды. Метод command применяет два аргумента: сигнатуру команды и замыкание
+    Artisan::command('mail:send {user}', function ($user) {
+        $this->info("Sending email to: {$user}!");
+    });
+
+Пользуясь контейнером служб, можно внедрять зависимости:
+    use App\Models\User;
+    use App\Support\DripEmailer;
+
+    Artisan::command('mail:send {user}', function (DripEmailer $drip, $user) {
+        $drip->send(User::find($user));
+    });
+
+При определении анонимных команд, можно использовать метод purpose. Это описание будет отображаться в списке php artisan list.
+    Artisan::command('mail:send {user}', function ($user) {
+        // ...
+    })->purpose('Send a marketing email to a user');
+
+-----------------------------------------------------------------------------------------------------------
+Определение вводимых данных
+-----------------------------------------------------------------------------------------------------------
+Что такое вводимые данные?
+    $signature = 'mail:send {user}'; {user} - это вводимые данные. Условно, это как например флаг --isAutoLoadDisabled, тоже вводимые данные.
+Если аргумент необязательный, то пишем {user?}
+А вот так пишется аргумент со значением по умолчанию, но я думаю это bad pattern.
+    $signature = mail:send {user=foo}
+
+Аргументы-флаги, которые обозначаются в командах (как --isAutoLoadDisabled) называют переключателями.
+    $signature = 'mail:send {user} {--queue}';
+Если при вызове команды был написан --queue, то он будет true, если нет - то false.
+
+Если при вызове команды должно быть указано значение для параметра - то пишем:
+    $signature = 'mail:send {user} {--queue=}'
+Если параметр не указан при вызове команды, то его значение будет null.
+    php artisan mail:send 1 --queue=default
+
+Чтобы назначить псевдоним, по-другому - алиас, при определении параметра, можно указать его перед имененем параметра вот так:
+    $signature = mail:send {user} {--Q|queue};
+
+Если хотим передать больше одного значения в вводимые данные, пишем:
+    $signature = mail:send {user*}
+И тогда запуск:
+    $signature = mail:send foo bar
+
+Можно комбинировать:
+    $signature = mail:send {user?*}
+
+Описание вводимых данных:
+    $signature = 'mail:send
+                  {user : The ID of the user}'
+
+Как получать значения вводимых данных? Вот так:
+    public function handle()
+    {
+        $userId = $this->argument('user');
+    }
+
+Если их несколько, то можно получить целый массив параметров:
+    public function handle()
+    {
+        $userId = $this->arguments();
+    }
+
+Либо:
+    public function handle()
+    {
+        $queueName = $this->option('queue');
+    }
+
+Ну и также:
+    public function handle()
+    {
+        $queueName = $this->options();
+    }
+
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
                                                   Routes
