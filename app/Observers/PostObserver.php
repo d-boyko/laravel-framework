@@ -28,9 +28,7 @@ class PostObserver
      */
     public function created(): void
     {
-        $data = DB::table('users')
-            ->leftJoin('posts', 'id','=', 'user_id')
-            ->select('users.name as name', 'posts.title as title', 'posts.content as content');
+        $data = Post::all();
         $key = Post::class . '-' . now()->format('d.m.Y');
 
         Cache::forget($key);

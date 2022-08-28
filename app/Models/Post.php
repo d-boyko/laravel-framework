@@ -12,11 +12,7 @@ use Illuminate\Support\Facades\DB;
 /**
  * App\Models\Post
  *
- * @property-read \App\Models\User|null $user
- * @method static \Database\Factories\PostFactory factory(...$parameters)
- * @method static \Illuminate\Database\Eloquent\Builder|Post newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|Post newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|Post query()
+ * @property-read User|null $user
  * @mixin Eloquent
  */
 class Post extends Model
@@ -50,9 +46,7 @@ class Post extends Model
         $result = Cache::get($key, false);
 
         if (!$result) {
-            $data = DB::table('users')
-                ->leftJoin('posts', 'id','=', 'user_id')
-                ->select('users.name as name', 'posts.title as title', 'posts.content as content');
+            $data = Post::all();
             Cache::put($key, $data);
         }
 

@@ -310,9 +310,8 @@ class UserController extends Controller
     {
         // If you have dependencies with some other table, you should make
         // your foreign_key cascadeOnDelete
-        $user = User::find(100);
-        $delete = $user->delete();
-
+        $user = User::find(3);
+        $delete = $user->forceDelete();
         dd($delete);
     }
 

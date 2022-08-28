@@ -9,7 +9,7 @@ class CreatePostAction
     public function handle(): void
     {
         Post::create([
-            'user_id' => 100000,
+            'user_id' => 100,
             'title' => 'Test creating title',
             'content' => 'Test creating content'
         ]);
