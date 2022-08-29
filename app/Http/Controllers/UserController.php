@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Actions\ExportDatabaseTables;
 use App\Actions\GetLoggedInUserInfoAction;
+use App\Models\Phone;
 use App\Models\Post;
 use App\Models\User;
 use Exception;
@@ -427,5 +428,11 @@ class UserController extends Controller
                     ->limit(1))->toSql();
 
         dd($query);
+    }
+
+    #[NoReturn] public function findUserPhone($userId)
+    {
+        $phone = User::find($userId)->phone;
+        dd($phone);
     }
 }

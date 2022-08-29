@@ -2,10 +2,12 @@
 
 namespace Database\Seeders;
 
+use App\Models\Phone;
 use App\Models\User;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class UserSeeder extends Seeder
+class PhoneSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,6 +16,7 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
-        User::factory(200)->create();
+        $countOfUsers = User::all()->count();
+        Phone::factory($countOfUsers)->create();
     }
 }

@@ -61,3 +61,7 @@ Route::name('user.')->group(function() {
         Route::get('is-test-sub-query', [UserController::class, 'testSubQueries'])->name('is-test-sub-query');
     });
 });
+
+Route::prefix('phone-model')->group(function() {
+    Route::get('find-phone/{userId}', [UserController::class, 'findUserPhone'])->name('find-user-phone');
+});

@@ -24,44 +24,56 @@ class UserObserver
     /**
      * Handle the User "updated" event.
      *
-     * @param User $user
      * @return void
      */
-    public function updated(User $user): void
+    public function updated(): void
     {
+        $data = User::all();
+        $key = User::class . '-' . now()->format('d.m.Y');
 
+        Cache::forget($key);
+        Cache::put($key, $data);
     }
 
     /**
      * Handle the User "deleted" event.
      *
-     * @param User $user
      * @return void
      */
-    public function deleted(User $user): void
+    public function deleted(): void
     {
-        //
+        $data = User::all();
+        $key = User::class . '-' . now()->format('d.m.Y');
+
+        Cache::forget($key);
+        Cache::put($key, $data);
     }
 
     /**
      * Handle the User "restored" event.
      *
-     * @param User $user
      * @return void
      */
-    public function restored(User $user): void
+    public function restored(): void
     {
-        //
+        $data = User::all();
+        $key = User::class . '-' . now()->format('d.m.Y');
+
+        Cache::forget($key);
+        Cache::put($key, $data);
     }
 
     /**
      * Handle the User "force deleted" event.
      *
-     * @param User $user
      * @return void
      */
-    public function forceDeleted(User $user): void
+    public function forceDeleted(): void
     {
-        //
+        $data = User::all();
+        $key = User::class . '-' . now()->format('d.m.Y');
+
+        Cache::forget($key);
+        Cache::put($key, $data);
     }
 }
