@@ -100,6 +100,9 @@ class User extends Authenticatable
         return $this->hasOne(Phone::class, 'user_id');
     }
 
+    /**
+     * @return HasMany
+     */
     public function roles(): HasMany
     {
         return $this->HasMany(Role::class, 'user_id');

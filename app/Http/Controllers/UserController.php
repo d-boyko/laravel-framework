@@ -438,10 +438,7 @@ class UserController extends Controller
 
     public function getUserRoles($userId)
     {
-        $roles = User::find($userId)->roles;
-        dd($roles);
-        foreach ($user->roles as $role) {
-            dd($role->pivot->user_id);
-        }
+        $user = User::find($userId)->roles;
+        dd($user);
     }
 }
