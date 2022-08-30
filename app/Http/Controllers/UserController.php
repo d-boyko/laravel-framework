@@ -92,7 +92,7 @@ class UserController extends Controller
 
     #[NoReturn] public function getPostByUserModel()
     {
-        $response = User::find(17)->post()->orderByDesc('title')->take(10)->get();
+        $response = User::find(17)->posts()->orderByDesc('title')->take(10)->get();
 
         foreach ($response as $post) {
             echo $post->title . PHP_EOL;
@@ -434,5 +434,14 @@ class UserController extends Controller
     {
         $phone = User::find($userId)->phone;
         dd($phone);
+    }
+
+    public function getUserRoles($userId)
+    {
+        $roles = User::find($userId)->roles;
+        dd($roles);
+        foreach ($user->roles as $role) {
+            dd($role->pivot->user_id);
+        }
     }
 }

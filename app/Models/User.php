@@ -87,7 +87,7 @@ class User extends Authenticatable
     /**
      * @return HasMany
      */
-    public function post(): HasMany
+    public function posts(): HasMany
     {
         return $this->hasMany(Post::class, 'user_id');
     }
@@ -98,6 +98,11 @@ class User extends Authenticatable
     public function phone(): HasOne
     {
         return $this->hasOne(Phone::class, 'user_id');
+    }
+
+    public function roles(): HasMany
+    {
+        return $this->HasMany(Role::class, 'user_id');
     }
 
     /**

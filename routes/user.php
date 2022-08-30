@@ -65,3 +65,7 @@ Route::name('user.')->group(function() {
 Route::prefix('phone-model')->group(function() {
     Route::get('find-phone/{userId}', [UserController::class, 'findUserPhone'])->name('find-user-phone');
 });
+
+Route::prefix('role-model')->group(function() {
+    Route::get('find-roles/{userId}', [UserController::class, 'getUserRoles'])->name('user.get-user-roles');
+});
