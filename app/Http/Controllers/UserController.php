@@ -8,6 +8,7 @@ use App\Models\Phone;
 use App\Models\Post;
 use App\Models\User;
 use Exception;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
@@ -455,5 +456,89 @@ class UserController extends Controller
         foreach ($user->roles as $role) {
             dd($role->pivot->role_id);
         }
+    }
+
+    #[NoReturn] public function getPostsWithUserRelations()
+    {
+        $user = User::find(11);
+        $posts = $user->posts()
+            ->where('is_published', '=', true)
+            ->get();
+        dd($posts);
+    }
+
+    #[NoReturn] public function getPostsWithConditions()
+    {
+        /**
+         *  select *
+            from posts
+            where user_id = ? and is_published = true and title like '17%'
+         */
+        $user = User::find(11);
+        $posts = $user->posts()
+            ->where('is_published', '=', true)
+            ->where('title', 'LIKE', '17%')
+            ->get();
+        dd($posts);
+    }
+
+    public function whereWithBraces()
+    {
+        /**
+         *  select *
+            from posts
+            where user_id = ? and (is_active = 1 or title >= 100)
+         */
+        $user = User::find(11);
+        $user->posts()
+            ->where(function(Builder $query) {
+            $query->where('is_published', 1)
+                ->orWhere('title', 'LIKE', '17%');
+        })->get();
+    }
+
+    /**
+     * @return void
+     */
+    #[NoReturn] public function getRelations()
+    {
+        // get all the posts, which created by some user
+        $posts = Post::has('user')->get();
+        dd($posts);
+    }
+
+    /**
+     * @return void
+     */
+    #[NoReturn] public function getCountWithConditionRelations()
+    {
+        // get all the posts, which created by some user
+        $posts = Post::has('user', '>=', 2)->get();
+        dd($posts);
+    }
+
+    /**
+     * @return void
+     */
+    #[NoReturn] public function getWhereHasRelations()
+    {
+        // get all the posts, which created by some user
+        $posts = Post::whereHas('user', function (Builder $query) {
+           $query->where('content', 'LIKE', '%8n%');
+        });
+
+        foreach ($posts as $post) {
+            dd($post->title);
+        }
+    }
+
+    /**
+     * @return void
+     */
+    #[NoReturn] public function whereDoesntHaveRelations()
+    {
+        // get all the posts, which created by some user
+        $posts = Post::doesntHave('user');
+        dd($posts);
     }
 }
