@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\RoleController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 Route::name('user.')->group(function() {
@@ -68,19 +69,19 @@ Route::prefix('phone-model')->group(function() {
 
 Route::name('role-and-user.')->group(function() {
     Route::prefix('role-model')->group(function() {
-        Route::get('find-roles/{userId}', [UserController::class, 'getUserRoles'])->name('get-user-roles');
-        Route::get('find-roles-with-cond/{userId}', [UserController::class, 'getRolesWithConditions'])->name('conditions-with-roles-get');
-        Route::get('get-pivot-data/{userId}', [UserController::class, 'getPivotColumns'])->name('get-pivot-columns');
-        Route::get('posts-with-user-relations', [UserController::class, 'getPostsWithUserRelations'])->name('get-posts-with-user-relations');
-        Route::get('posts-with-some-conditions', [UserController::class, 'getPostsWithConditions'])->name('get-posts-with-conditions');
-        Route::get('posts-with-braces', [UserController::class, 'whereWithBraces'])->name('where-with-braces');
+        Route::get('find-roles/{userId}', [RoleController::class, 'getUserRoles'])->name('get-user-roles');
+        Route::get('find-roles-with-cond/{userId}', [RoleController::class, 'getRolesWithConditions'])->name('conditions-with-roles-get');
+        Route::get('get-pivot-data/{userId}', [RoleController::class, 'getPivotColumns'])->name('get-pivot-columns');
     });
 });
 
 Route::name('post.')->group(function() {
     Route::prefix('post-model')->group(function() {
-        Route::get('has-relations-with-user', [UserController::class, 'getRelations'])->name('has-relations-with-user');
-        Route::get('has-relations-with-count-user', [UserController::class, 'getCountWithConditionRelations'])->name('has-relations-with-count-user');
-        Route::get('has-where-relations', [UserController::class, 'getWhereHasRelations'])->name('get-where-has-relations');
+        Route::get('has-relations-with-user', [PostController::class, 'getRelations'])->name('has-relations-with-user');
+        Route::get('has-relations-with-count-user', [PostController::class, 'getCountWithConditionRelations'])->name('has-relations-with-count-user');
+        Route::get('has-where-relations', [PostController::class, 'getWhereHasRelations'])->name('get-where-has-relations');
+        Route::get('posts-with-user-relations', [PostController::class, 'getPostsWithUserRelations'])->name('get-posts-with-user-relations');
+        Route::get('posts-with-some-conditions', [PostController::class, 'getPostsWithConditions'])->name('get-posts-with-conditions');
+        Route::get('posts-with-braces', [PostController::class, 'whereWithBraces'])->name('where-with-braces');
     });
 });
