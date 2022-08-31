@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Prunable;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -100,12 +101,17 @@ class User extends Authenticatable
         return $this->hasOne(Phone::class, 'user_id');
     }
 
-    /**
-     * @return HasMany
-     */
-    public function roles(): HasMany
+//    /**
+//     * @return HasMany
+//     */
+//    public function roles(): HasMany
+//    {
+//        return $this->HasMany(Role::class, 'user_id');
+//    }
+
+    public function roles(): belongsToMany
     {
-        return $this->HasMany(Role::class, 'user_id');
+        return $this->belongsToMany(Role::class, 'role_user')->using(RoleUser::class);
     }
 
     /**

@@ -3,12 +3,14 @@
 namespace Database\Factories;
 
 use App\Models\Role;
+use App\Models\RoleUser;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends Factory<Role>
+ * @extends Factory<RoleUser>
  */
-class RoleFactory extends Factory
+class RoleUserFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -17,9 +19,9 @@ class RoleFactory extends Factory
      */
     public function definition(): array
     {
-        $roles = ['Reader', 'Commenter', 'Editor', 'Admin'];
         return [
-            'name' =>  $roles[fake()->numberBetween(0,3)],
+            'user_id' => fake()->unique(true)->numberBetween(1, User::count()),
+            'role_id' => fake()->unique()->numberBetween(1, Role::count()),
         ];
     }
 }

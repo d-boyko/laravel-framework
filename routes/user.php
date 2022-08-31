@@ -68,4 +68,6 @@ Route::prefix('phone-model')->group(function() {
 
 Route::prefix('role-model')->group(function() {
     Route::get('find-roles/{userId}', [UserController::class, 'getUserRoles'])->name('user.get-user-roles');
+    Route::get('find-roles-with-cond/{userId}', [UserController::class, 'getRolesWithConditions'])->name('user.conditions-with-roles-get');
+    Route::get('get-pivot-data/{userId}', [UserController::class, 'getPivotColumns'])->name('get-pivot-columns');
 });
