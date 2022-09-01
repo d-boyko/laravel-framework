@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DiggingDeeperController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
@@ -49,6 +50,10 @@ Route::get('/posts/create/', [PostController::class, 'create'])->name('posts.cre
 Route::get('/users/test/models', [UserController::class, 'test']);
 
 Route::get('/test-export', [UserController::class, 'testCsv'])->name('test-csv');
+
+Route::prefix('collections')->group(function () {
+    Route::get('/test-col', [DiggingDeeperController::class, 'collections'])->name('digging-deeper.collections');
+});
 
 Route::fallback(function () {
     return redirect(route('home'));

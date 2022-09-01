@@ -1685,7 +1685,7 @@ isClean делает точно наоборот.
 -----------------------------------------------------------------------------------------------------------
 Удаление моделей
 -----------------------------------------------------------------------------------------------------------
-Удаление модели, тут нехуй добавить, нехуй убавить
+Удаление модели, тут нехуй добавить, нехуй убавить. © Daniil Boyko
     $user = User::find(1);
     $user->delete();
 
@@ -1726,6 +1726,101 @@ isClean делает точно наоборот.
         ->where('airline_id', 1)
         ->get();
 
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                                                Коллекции
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Коллекции - массивы на стероидах. © Daniil Boyko
+
+-----------------------------------------------------------------------------------------------------------
+Базовые понятия
+-----------------------------------------------------------------------------------------------------------
+Класс Illuminate\Support\Collection обеспечивает гибкую и удобную обертку для работы с массивами данных.
+Можно использовать хелпер 'collect'.
+Как я сказал выше, помощник (хелпер) collect всегда возвращает экземпляр Collection для переданного массива.
+    $collection = collect([1,2,3]);
+
+-----------------------------------------------------------------------------------------------------------
+Методы коллекций
+-----------------------------------------------------------------------------------------------------------
+Здесь мы будем использовать хелпер collect, чтобы создать новый экземпляр коллекции из массива,
+запустим функцию strtoupper для каждого элемента, а затем удалим все пустые элементы:
+    $collection = collect(['taylor', 'abigail', null])->map(function ($name) {
+        return strtoupper($name);
+    })->reject(function ($name) {
+        return empty($name);
+    });
+Collection позволяет объединять необходимые вам методы в цепочку для выполнения последовательного перебора
+и сокращения базового массива. Каждый метод коллекции возвращает совершенно новый экземпляр Collection.
+    Collection::macro('toUpper', function() {
+        return $this->map(function ($value) {
+            return Str::upper($value);
+        });
+    });
+
+    $collection = collect(['first', 'second']);
+    $collection->toUpper();
+
+
+Все методы Eloquent, которые возвращают более одной модели - возвращают экземпляры класса:
+    Illuminate\Database\Eloquent\Collection, включая результаты, полученные с помощью метода get или доступные через отношения.
+
+    $result = [];
+
+    $eloquentCollection = User::withTrashed()->get();
+    $collection = collect($eloquentCollection->toArray());
+
+    $result['first'] = $collection->first();
+    $result['last'] = $collection->last();
+    $result['where']['data'] = $collection
+        ->where('name', '=', 'Adonis Herzog') // where condition
+        ->values() // get only values from collection
+        ->keyBy('id'); // the key will be equal to id from collection
+
+    $result['where']['count'] = $result['where']['data']
+        ->count(); // Количество элементов коллекции
+
+    $result['where']['isEmpty'] = $result['where']['data']
+        ->isEmpty(); // коллекция пуста?
+
+    $result['where']['isNotEmpty'] = $result['where']['data']
+        ->isNotEmpty(); // коллекция не пуста?
+
+    $result['where']['first'] = $collection
+        ->firstWhere('created_at', '>', '2022-09-01 01:15:58'); // взять первое значение из коллекции с условием
+
+    Базовое значение не изменится, но новое значение вернется
+    $result['map'] = $collection->map(function (array $element) {
+        return [$element['name'], $element['email']];
+    }); // re-mapping some collection
+
+
+    $defaultCollection = collect(User::all()->toArray());
+
+    $defaultCollection->transform(function (array $item) {
+       return [
+           'id' => $item['id'],
+           'name' => $item['name'],
+           'email' => $item['email'],
+           'created_at' => $item['created_at']
+       ];
+    });
+
+    Вместо метода orWhere, потому что
+    $filteredCollection = $defaultCollection->filter(function ($item) {
+        return
+            ($item['email'] == 'abagail.conroy@example.com') ||
+            ($item['email'] == 'xmurray@example.net');
+        })->keyBy('id');
+
+    Разделение коллекции на chunks
+    $chunkedCollection = collect([1,2,3,4,5,6,7,8,9,10]);
+    $chunks = $chunkedCollection->chunk(4);
+
+    dd($filteredCollection, $chunks, $chunks[0], $chunks[0][2]);
+                                         ^              ^
+                        Обращение к конкретному chunk конкретного элемента
+
+Методы коллекции -> https://laravel.su/docs/8.x/collections#available-methods
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
                                             Service Container
@@ -2067,16 +2162,16 @@ Laravel загрузит отложенный сервис-провайдер т
         public function handle($job, $next)
         {
             Redis::throttle('key')
-                    ->block(0)->allow(1)->every(5)
-                    ->then(function () use ($job, $next) {
-                        // Блокировка получена ...
+                ->block(0)->allow(1)->every(5)
+                ->then(function () use ($job, $next) {
+                    // Блокировка получена ...
 
-                        $next($job);
-                    }, function () use ($job) {
-                        // Не удалось получить блокировку ...
+                    $next($job);
+                }, function () use ($job) {
+                    // Не удалось получить блокировку ...
 
-                        $job->release(5);
-                    });
+                    $job->release(5);
+                });
         }
     }
 
