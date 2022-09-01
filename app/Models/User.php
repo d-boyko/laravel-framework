@@ -21,8 +21,6 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable, SoftDeletes, Prunable;
 
-    const CACHE_TIMEOUT = 60;
-
 //    If the table is non-standard
 //    protected $table = 'users';
 
@@ -109,6 +107,9 @@ class User extends Authenticatable
 //        return $this->HasMany(Role::class, 'user_id');
 //    }
 
+    /**
+     * @return BelongsToMany
+     */
     public function roles(): belongsToMany
     {
         return $this->belongsToMany(Role::class, 'role_user')->using(RoleUser::class);

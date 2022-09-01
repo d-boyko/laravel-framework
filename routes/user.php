@@ -56,6 +56,7 @@ Route::name('user.')->group(function() {
         Route::get('count-of-related-models-with-condition', [UserController::class, 'getCountOfRelatedModelsWithCondition'])->name('condition-with-models-related-of-count-get');
         Route::get('count-with-select-function', [UserController::class, 'getCountWithSelectFunction'])->name('get-count-with-select-function');
         Route::get('count-of-users', [UserController::class, 'getCountOfUsers'])->name('get-count-of-users');
+        Route::get('count-of-relations', [UserController::class, 'getCountOfPostsRelations'])->name('get-count-of-posts-relations');
 
         Route::get('is-dirty-or-clean', [UserController::class, 'isUserDirtyOrClean'])->name('clean-or-dirty-user-is');
         Route::get('is-model-changed', [UserController::class, 'isUserModelChanged'])->name('changed-model-user-is');

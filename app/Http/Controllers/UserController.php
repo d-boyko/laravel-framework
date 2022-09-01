@@ -436,4 +436,18 @@ class UserController extends Controller
         $phone = User::find($userId)->phone;
         dd($phone);
     }
+
+    #[NoReturn] public function getCountOfPostsRelations()
+    {
+//        $users = User::withCount('posts')->get();
+//         foreach ($users as $user) {
+//             dd($user->post_count);
+//         }
+
+        $users = User::withCount('roles')->get();
+        dd($users);
+        foreach ($users as $user) {
+            dd($user->post_count);
+        }
+    }
 }
