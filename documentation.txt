@@ -5,14 +5,17 @@ was made according to self-improvement spreadsheet
 Max Orlov - Laravel
 Cutcode - Laravel
 
-App structure - 15 row
-Routes - 226 row
-Controllers - 417 row
-Middlewares - 504 row
-Views - 617 row
-Models - 713 row
-Service Provider - 1157
-Jobs, Queue - 1338
+App structure - 21
+Artisan console - 232
+Routes - 540
+Controllers - 731
+Middlewares - 818
+Views - 931
+Models - 1037
+Eloquent query builder - 1369
+Collections - 1733
+Service Container - 1829
+Jobs, Queue - 2010
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
                                            App structure
@@ -1727,7 +1730,7 @@ isClean делает точно наоборот.
         ->get();
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-                                                Коллекции
+                                                Collections
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 Коллекции - массивы на стероидах. © Daniil Boyko
 
