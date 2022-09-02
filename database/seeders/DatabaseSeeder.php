@@ -14,18 +14,22 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
 
-        if (config('database.default') !== 'mysql_trello') {
-            $this->call(UserSeeder::class);
-            $this->call(RoleSeeder::class);
-            $this->call(PostSeeder::class);
-            $this->call(VersionSeeder::class);
-            $this->call(PhoneSeeder::class);
-            $this->call(RoleUserSeeder::class);
-        } else {
-            $this->call(DeskSeeder::class);
-            $this->call(DeskListSeeder::class);
-            $this->call(CardSeeder::class);
-            $this->call(TaskSeeder::class);
+        if (config('database.default') == 'mysql_users') {
+            $this->call([
+                UserSeeder::class,
+                RoleSeeder::class,
+                PostSeeder::class,
+                VersionSeeder::class,
+                PhoneSeeder::class,
+                RoleUserSeeder::class,
+            ]);
+        } elseif (config('database.default') == 'mysql_trello') {
+            $this->call([
+                DeskSeeder::class,
+                DeskListSeeder::class,
+                CardSeeder::class,
+                TaskSeeder::class,
+            ]);
         }
     }
 }
