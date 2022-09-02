@@ -3,11 +3,14 @@
 namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\DeskStoreRequest;
 use App\Http\Resources\DeskResource;
 use App\Models\Desk;
-use Illuminate\Http\Request;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Http\Response;
+use Symfony\Component\HttpFoundation\Response as ResponseAlias;
 
 class DeskController extends Controller
 {
@@ -18,50 +21,57 @@ class DeskController extends Controller
      */
     public function index()
     {
-        return DeskResource::collection(Desk::with('lists')->get());
+        return DeskResource::collection(Desk::get());
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param Request $request
+     * @param DeskStoreRequest $request
+     * @return DeskResource
      */
-    public function store(Request $request)
+    public function store(DeskStoreRequest $request)
     {
-        //
+        $createdDesk = Desk::create($request->validated());
+
+        return new DeskResource($createdDesk);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param int $id
+     * @param Desk $desk
      * @return DeskResource
      */
-    public function show(int $id)
+    public function show(Desk $desk)
     {
-        return new DeskResource(Desk::with('lists')->findOrFail($id));
+        return new DeskResource($desk);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param Request $request
-     * @param  int  $id
-     * @return Response
+     * @param DeskStoreRequest $request
+     * @param Desk $desk
+     * @return DeskResource
      */
-    public function update(Request $request, $id)
+    public function update(DeskStoreRequest $request, Desk $desk)
     {
-        //
+        $desk->update($request->validated());
+
+        return new DeskResource($desk);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
-     * @return Response
+     * @param Desk $desk
+     * @return Application|ResponseFactory|Response
      */
-    public function destroy($id)
+    public function destroy(Desk $desk)
     {
-        //
+        $desk->delete();
+
+        return response(null, ResponseAlias::HTTP_NO_CONTENT);
     }
 }
