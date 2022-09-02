@@ -3,11 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
-use Illuminate\Http\Request;
+use JetBrains\PhpStorm\NoReturn;
 
 class DiggingDeeperController extends Controller
 {
-    public function collections()
+    #[NoReturn] public function collections()
     {
         $result = [];
         $eloquentCollection = User::withTrashed()->get();
@@ -65,11 +65,6 @@ class DiggingDeeperController extends Controller
         $chunks = $chunkedCollection->chunk(4);
 
         dd($filteredCollection, $chunks, $chunks[0], $chunks[0][2]);
-
-        // SOME METHODS
-        // prepend - add some item and change to the first position of collection
-        // push - add some item and change to the last position of collection
-        // pull - take some element from the collection, the element will be removed from collection
 
         dd($result, $defaultCollection);
 

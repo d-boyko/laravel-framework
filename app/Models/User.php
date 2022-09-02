@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use DateTimeInterface;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Prunable;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -97,6 +98,11 @@ class User extends Authenticatable
     public function phone(): HasOne
     {
         return $this->hasOne(Phone::class, 'user_id');
+    }
+
+    protected function serializeDate(DateTimeInterface $date): string
+    {
+        return $date->format('d.m.Y');
     }
 
 //    /**
