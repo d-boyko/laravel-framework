@@ -2,10 +2,13 @@
 
 namespace Database\Factories;
 
+use App\Models\Desk;
+use App\Models\DeskList;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Str;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\DeskList>
+ * @extends Factory<DeskList>
  */
 class DeskListFactory extends Factory
 {
@@ -14,10 +17,11 @@ class DeskListFactory extends Factory
      *
      * @return array<string, mixed>
      */
-    public function definition()
+    public function definition(): array
     {
         return [
-            //
+            'name' => Str::random(6),
+            'desk_id' => fake()->numberBetween(1, Desk::count()),
         ];
     }
 }
