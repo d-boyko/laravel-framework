@@ -13,6 +13,10 @@ return new class extends Migration
      */
     public function up(): void
     {
+        if (config('database.default') !== 'mysql_users') {
+            return;
+        }
+
         Schema::create('roles', function (Blueprint $table) {
             $table->id();
             $table->string('name')->nullable();
@@ -27,6 +31,10 @@ return new class extends Migration
      */
     public function down(): void
     {
+        if (config('database.default') !== 'mysql_users') {
+            return;
+        }
+
         Schema::dropIfExists('roles');
     }
 };

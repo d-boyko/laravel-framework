@@ -11,14 +11,16 @@ return new class extends Migration
      *
      * @return void
      */
-    public function up()
+    public function up(): void
     {
-        if (config('database.default') !== 'mysql_users') {
+        if (config('database.default') !== 'mysql_trello') {
             return;
         }
 
-        Schema::table('users', function (Blueprint $table) {
-            $table->softDeletes()->after('id');
+        Schema::create('desks', function (Blueprint $table) {
+            $table->id();
+            $table->string('name');
+            $table->timestamps();
         });
     }
 
@@ -27,14 +29,12 @@ return new class extends Migration
      *
      * @return void
      */
-    public function down()
+    public function down(): void
     {
-        if (config('database.default') !== 'mysql_users') {
+        if (config('database.default') !== 'mysql_trello') {
             return;
         }
 
-        Schema::table('users', function (Blueprint $table) {
-            $table->dropSoftDeletes();
-        });
+        Schema::dropIfExists('desks');
     }
 };

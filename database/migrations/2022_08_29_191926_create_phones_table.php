@@ -13,6 +13,10 @@ return new class extends Migration
      */
     public function up(): void
     {
+        if (config('database.default') !== 'mysql_users') {
+            return;
+        }
+
         Schema::create('phones', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
@@ -29,6 +33,10 @@ return new class extends Migration
      */
     public function down(): void
     {
+        if (config('database.default') !== 'mysql_users') {
+            return;
+        }
+
         Schema::dropIfExists('phones');
     }
 };

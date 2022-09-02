@@ -13,6 +13,10 @@ return new class extends Migration
      */
     public function up(): void
     {
+        if (config('database.default') !== 'mysql_users') {
+            return;
+        }
+
         Schema::create('role_user', function (Blueprint $table) {
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
@@ -29,6 +33,10 @@ return new class extends Migration
      */
     public function down(): void
     {
+        if (config('database') !== 'laravel_base') {
+            return;
+        }
+
         Schema::dropIfExists('role_user');
     }
 };

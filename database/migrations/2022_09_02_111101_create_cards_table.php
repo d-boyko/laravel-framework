@@ -13,13 +13,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        if (config('database.default') !== 'mysql_users') {
+        if (config('database.default') !== 'mysql_trello') {
             return;
         }
 
-        Schema::table('users', function (Blueprint $table) {
-            $table->boolean('is_admin')->default(false);
-            //->after('column_name');
+        Schema::create('cards', function (Blueprint $table) {
+            $table->id();
+            $table->string('name');
+            $table->unsignedBigInteger('desk_list_id');
+            $table->foreign('desk_list_id')->references('id')->on('desk_lists')->cascadeOnDelete();
+            $table->timestamps();
         });
     }
 
@@ -30,12 +33,10 @@ return new class extends Migration
      */
     public function down(): void
     {
-        if (config('database.default') !== 'mysql_users') {
+        if (config('database.default') !== 'mysql_trello') {
             return;
         }
 
-        Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn('is_admin');
-        });
+        Schema::dropIfExists('cards');
     }
 };
