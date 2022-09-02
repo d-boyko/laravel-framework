@@ -13,5 +13,6 @@ class VersionObserver
     {
         Cache::forget('versions');
         Cache::forget('last_version');
+        Cache::forget('paginated_versions');
     }
 }

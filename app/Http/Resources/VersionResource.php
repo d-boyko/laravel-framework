@@ -7,6 +7,10 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use JsonSerializable;
 
+/**
+ * @property mixed $release_date
+ * @property mixed $title
+ */
 class VersionResource extends JsonResource
 {
     public static $wrap = 'test';

@@ -16,4 +16,6 @@ use App\Http\Controllers\Api\V1\IndexController;
 
 Route::get('/', [IndexController::class, 'index'])->name('last-version');
 
-Route::get('/all', [IndexController::class, 'all'])->name('home');
+Route::get('/all-paginate', [IndexController::class, 'allPagination'])->name('pagination-all');
+
+Route::get('/all', [IndexController::class, 'all'])->name('all-versions');

@@ -10,6 +10,9 @@ use Illuminate\Support\Facades\Cache;
 
 class IndexController extends Controller
 {
+    /**
+     * @return VersionResource
+     */
     public function index()
     {
         return new VersionResource(Cache::remember('last_version', 60*60*24, function() {
@@ -20,13 +23,23 @@ class IndexController extends Controller
 //        }));
     }
 
+    /**
+     * @return VersionCollection
+     */
+    public function allPagination()
+    {
+        return new VersionCollection(Cache::remember('paginated-versions', 60*60*24, function() {
+            return Version::paginate(1);
+        }));
+    }
+
+    /**
+     * @return VersionCollection
+     */
     public function all()
     {
         return new VersionCollection(Cache::remember('versions', 60*60*24, function() {
-            return Version::paginate(1);
+           return Version::all();
         }));
-//        return new VersionCollection(Cache::remember('versions', 60*60*24, function(){
-//            Version::paginate(1);
-//        }));
     }
 }
