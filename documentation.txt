@@ -25,6 +25,7 @@ Service Container - 1838
 Jobs, Queue - 2019
 Mutators, accessors, typification - 202208
 Api - 2278
+Cache - 2344
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
                                            App structure
