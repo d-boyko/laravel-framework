@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Http\Resources\DeskResource;
+use Illuminate\Database\Connection;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
@@ -17,6 +18,9 @@ class AppServiceProvider extends ServiceProvider
     public function register(): void
     {
 //        $this->app->bind(RegisterActionContract::class, RegisterUserAction::class);
+        $this->app->singleton(Connection::class, function ($app) {
+            return new Connection(config('database.default'));
+        });
     }
 
     /**
