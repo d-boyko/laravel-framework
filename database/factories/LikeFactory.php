@@ -21,8 +21,8 @@ class LikeFactory extends Factory
     public function definition(): array
     {
         $likeableTypes = [
-            'App\Models\Comment',
-            'App\Models\Video',
+            'video',
+            'comment',
         ];
         $randomKeys = array_rand($likeableTypes);
 
