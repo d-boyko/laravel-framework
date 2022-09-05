@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\DiggingDeeperController;
+use App\Http\Controllers\MorphController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
@@ -53,6 +54,13 @@ Route::get('/test-export', [UserController::class, 'testCsv'])->name('test-csv')
 
 Route::prefix('collections')->group(function () {
     Route::get('/test-col', [DiggingDeeperController::class, 'collections'])->name('digging-deeper.collections');
+});
+
+Route::name('morph.')->group(function() {
+    Route::prefix('morph')->group(function() {
+        Route::get('get-video', [MorphController::class, 'getVideo'])->name('get-video');
+        Route::get('get-parent', [MorphController::class, 'getParentLikeObject'])->name('get-parent-like-object');
+    });
 });
 
 Route::fallback(function () {
