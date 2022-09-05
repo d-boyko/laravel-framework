@@ -3,7 +3,6 @@
 namespace App\Providers;
 
 use App\Http\Resources\DeskResource;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
