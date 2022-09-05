@@ -33,10 +33,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        if (config('database') !== 'laravel_base') {
-            return;
-        }
-
         Schema::dropIfExists('role_user');
     }
 };

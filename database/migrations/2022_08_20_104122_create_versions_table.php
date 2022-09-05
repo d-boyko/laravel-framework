@@ -34,10 +34,6 @@ return new class extends Migration
      */
     public function down()
     {
-        if (config('database.default') !== 'mysql_users') {
-            return;
-        }
-
         Schema::dropIfExists('versions');
     }
 };

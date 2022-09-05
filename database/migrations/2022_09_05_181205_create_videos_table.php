@@ -31,10 +31,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        if (config('database.default') !== 'mysql_morph') {
-            return;
-        }
-
         Schema::dropIfExists('videos');
     }
 };
