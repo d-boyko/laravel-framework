@@ -37,6 +37,8 @@ class DatabaseSeeder extends Seeder
                 CommentSeeder::class,
                 LikeSeeder::class,
                 SocialPostSeeder::class,
+                TagSeeder::class,
+                TaggableSeeder::class,
             ]);
         }
     }

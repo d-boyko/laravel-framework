@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Comment;
 use App\Models\Like;
+use App\Models\SocialPost;
 use App\Models\Video;
 use JetBrains\PhpStorm\NoReturn;
 
@@ -41,5 +42,16 @@ class MorphController extends Controller
         $commentable = $comment->commentable;
 
         dd($commentable);
+    }
+
+    #[NoReturn] public function getTagsBySocialPost()
+    {
+        $socialPost = SocialPost::find(66);
+        $taggablePost = $socialPost->tags;
+
+        $video = Video::find(66);
+        $taggableVideo = $video->tags;
+
+        dd($taggablePost, $taggableVideo);
     }
 }
