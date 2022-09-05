@@ -13,6 +13,10 @@ return new class extends Migration
      */
     public function up(): void
     {
+        if (config('database.default') !== 'mysql_users') {
+            return;
+        }
+
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
@@ -33,6 +37,10 @@ return new class extends Migration
      */
     public function down(): void
     {
+        if (config('database.default') !== 'mysql_users') {
+            return;
+        }
+
         Schema::dropIfExists('users');
     }
 };

@@ -13,6 +13,10 @@ return new class extends Migration
      */
     public function up(): void
     {
+        if (config('database.default') !== 'mysql_users') {
+            return;
+        }
+
         Schema::create('failed_jobs', function (Blueprint $table) {
             $table->id();
             $table->string('uuid')->unique();
@@ -31,6 +35,10 @@ return new class extends Migration
      */
     public function down(): void
     {
+        if (config('database.default') !== 'mysql_users') {
+            return;
+        }
+
         Schema::dropIfExists('failed_jobs');
     }
 };

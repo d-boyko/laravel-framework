@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\SocialPost;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -32,9 +33,10 @@ class DatabaseSeeder extends Seeder
             ]);
         } elseif (config('database.default') == 'mysql_morph') {
             $this->call([
-                CommentSeeder::class,
                 VideoSeeder::class,
+                CommentSeeder::class,
                 LikeSeeder::class,
+                SocialPostSeeder::class,
             ]);
         }
     }

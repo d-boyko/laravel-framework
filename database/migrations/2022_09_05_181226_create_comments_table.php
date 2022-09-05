@@ -20,6 +20,8 @@ return new class extends Migration
         Schema::create('comments', function (Blueprint $table) {
             $table->id();
             $table->string('text')->default(null);
+            $table->string('commentable_type');
+            $table->integer('commentable_id');
             $table->timestamps();
         });
     }

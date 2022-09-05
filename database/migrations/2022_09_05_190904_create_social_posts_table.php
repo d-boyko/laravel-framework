@@ -17,9 +17,10 @@ return new class extends Migration
             return;
         }
 
-        Schema::create('videos', function (Blueprint $table) {
+        Schema::create('social_posts', function (Blueprint $table) {
             $table->id();
-            $table->string('title')->default(null);
+            $table->string('title');
+            $table->string('body');
             $table->timestamps();
         });
     }
@@ -35,6 +36,6 @@ return new class extends Migration
             return;
         }
 
-        Schema::dropIfExists('videos');
+        Schema::dropIfExists('social_posts');
     }
 };

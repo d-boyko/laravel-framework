@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Comment;
 use App\Models\Like;
 use App\Models\Video;
 use JetBrains\PhpStorm\NoReturn;
@@ -21,5 +22,24 @@ class MorphController extends Controller
         $likeable = $like->likeable;
 
         dd($likeable);
+    }
+
+    #[NoReturn] public function getVideosWithComments()
+    {
+        $video = Video::find(55);
+
+        foreach ($video->comments as $item) {
+            echo $item->text;
+        }
+
+        dd($video->comments);
+    }
+
+    #[NoReturn] public function getParentMorphManyObject()
+    {
+        $comment = Comment::find(1);
+        $commentable = $comment->commentable;
+
+        dd($commentable);
     }
 }
