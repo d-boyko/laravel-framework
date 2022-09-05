@@ -18,10 +18,10 @@ class DiggingDeeperController extends Controller
 
         $collection = collect($eloquentCollection->toArray());
 
-        $result['first'] = $collection->first();
-        $result['last'] = $collection->last();
+        $result['first_element'] = $collection->first();
+        $result['last_element'] = $collection->last();
         $result['where']['data'] = $collection
-            ->where('name', '=', 'Adonis Herzog') // where condition
+            ->where('name', '=', 'Ava Grimes') // where condition
             ->values() // get only values from collection
             ->keyBy('id'); // the key will be equal to id from collection
 
@@ -45,33 +45,33 @@ class DiggingDeeperController extends Controller
 
         $defaultCollection = collect(User::all()->toArray());
 
-//        $defaultCollection->transform(function (array $item) {
-//           return [
-//               'id' => $item['id'],
-//               'name' => $item['name'],
-//               'email' => $item['email'],
-//               'created_at' => $item['created_at']
-//           ];
-//        });
+        $defaultCollection->transform(function (array $item) {
+           return [
+               'id' => $item['id'],
+               'name' => $item['name'],
+               'email' => $item['email'],
+               'created_at' => $item['created_at'],
+           ];
+        });
 
         // Instead Of orWhere, because method OrWhere doesn't exist in collections
         $filteredCollection = $defaultCollection->filter(function ($item) {
             return
-                ($item['email'] == 'abagail.conroy@example.com') ||
-                ($item['email'] == 'xmurray@example.net');
-        })->keyBy('id'); //
+                ($item['email'] == 'bernadine37@example.org') ||
+                ($item['email'] == 'demarcus.spinka@example.net');
+        })->keyBy('id');
 
-        $chunkedCollection = collect([1,2,3,4,5,6,7,8,9,10]);
+        $chunkedCollection = collect([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
         $chunks = $chunkedCollection->chunk(4);
 
-        dd($filteredCollection, $chunks, $chunks[0], $chunks[0][2]);
+        dd($result, $defaultCollection, $filteredCollection, $chunks, $chunks[0], $chunks[0][2]);
 
-        dd($result, $defaultCollection);
-
-        dd(
-            get_class($eloquentCollection),
-            get_class($collection),
-            $collection
-        );
+//        dd($result, $defaultCollection);
+//
+//        dd(
+//            get_class($eloquentCollection),
+//            get_class($collection),
+//            $collection
+//        );
     }
 }

@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Http\Resources\DeskResource;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
@@ -33,6 +35,6 @@ class AppServiceProvider extends ServiceProvider
 //        JsonResource::withoutWrapping();
 
         // If we want to add standard work
-//        JsonResource::wrap('word');
+        DeskResource::wrap('test_wrapping');
     }
 }
