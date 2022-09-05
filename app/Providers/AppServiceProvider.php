@@ -36,6 +36,7 @@ class AppServiceProvider extends ServiceProvider
         Relation::enforceMorphMap([
             'video' => 'App\Models\Video',
             'comment' => 'App\Models\Comment',
+            'social_post' => 'App\Models\SocialPost',
         ]);
     }
 }
