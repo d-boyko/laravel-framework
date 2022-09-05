@@ -11,10 +11,17 @@ return new class extends Migration
      *
      * @return void
      */
-    public function up()
+    public function up(): void
     {
+        if (config('database.default') !== 'mysql_morph') {
+            return;
+        }
+
         Schema::create('likes', function (Blueprint $table) {
             $table->id();
+            $table->boolean('is_liked');
+            $table->integer('likeable_id');
+            $table->string('likeable_type');
             $table->timestamps();
         });
     }
@@ -24,7 +31,7 @@ return new class extends Migration
      *
      * @return void
      */
-    public function down()
+    public function down(): void
     {
         Schema::dropIfExists('likes');
     }

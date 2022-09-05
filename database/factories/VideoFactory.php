@@ -2,10 +2,12 @@
 
 namespace Database\Factories;
 
+use App\Models\Video;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Str;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Video>
+ * @extends Factory<Video>
  */
 class VideoFactory extends Factory
 {
@@ -14,10 +16,10 @@ class VideoFactory extends Factory
      *
      * @return array<string, mixed>
      */
-    public function definition()
+    public function definition(): array
     {
         return [
-            //
+            'title' => Str::random(10),
         ];
     }
 }

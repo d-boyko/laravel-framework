@@ -11,10 +11,15 @@ return new class extends Migration
      *
      * @return void
      */
-    public function up()
+    public function up(): void
     {
+        if (config('database.default') !== 'mysql_morph') {
+            return;
+        }
+
         Schema::create('videos', function (Blueprint $table) {
             $table->id();
+            $table->string('title')->default(null);
             $table->timestamps();
         });
     }
@@ -24,7 +29,7 @@ return new class extends Migration
      *
      * @return void
      */
-    public function down()
+    public function down(): void
     {
         Schema::dropIfExists('videos');
     }

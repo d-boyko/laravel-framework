@@ -30,6 +30,12 @@ class DatabaseSeeder extends Seeder
                 CardSeeder::class,
                 TaskSeeder::class,
             ]);
+        } elseif (config('database.default') == 'mysql_morph') {
+            $this->call([
+                CommentSeeder::class,
+                VideoSeeder::class,
+                LikeSeeder::class,
+            ]);
         }
     }
 }
