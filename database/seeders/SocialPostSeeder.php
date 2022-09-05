@@ -2,11 +2,10 @@
 
 namespace Database\Seeders;
 
-use App\Models\RoleUser;
-use App\Models\User;
+use App\Models\SocialPost;
 use Illuminate\Database\Seeder;
 
-class RoleUserSeeder extends Seeder
+class SocialPostSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -15,6 +14,6 @@ class RoleUserSeeder extends Seeder
      */
     public function run(): void
     {
-        RoleUser::factory(User::count())->create();
+        SocialPost::factory(100)->create();
     }
 }

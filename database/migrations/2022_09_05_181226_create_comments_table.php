@@ -13,20 +13,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        if (config('database.default') !== 'mysql_users') {
+        if (config('database.default') !== 'mysql_morph') {
             return;
         }
 
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('comments', function (Blueprint $table) {
             $table->id();
+            $table->string('text')->default(null);
+            $table->string('commentable_type');
+            $table->integer('commentable_id');
             $table->timestamps();
-
-            $table->string('name');
-            $table->string('email')->unique();
-            $table->string('password');
-            $table->rememberToken();
-
-            $table->boolean('is_active')->default(true);
         });
     }
 
@@ -37,10 +33,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        if (config('database.default') !== 'mysql_users') {
-            return;
-        }
-
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('comments');
     }
 };

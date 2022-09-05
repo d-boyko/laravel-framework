@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Http\Resources\DeskResource;
+use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
@@ -30,10 +31,11 @@ class AppServiceProvider extends ServiceProvider
             $view->with('balance', 12345);
         });
 
-        // If we don't want to add 'data' or any other word into json output
-//        JsonResource::withoutWrapping();
-
-        // If we want to add standard work
         DeskResource::wrap('test_wrapping');
+
+        Relation::enforceMorphMap([
+            'video' => 'App\Models\Video',
+            'comment' => 'App\Models\Comment',
+        ]);
     }
 }

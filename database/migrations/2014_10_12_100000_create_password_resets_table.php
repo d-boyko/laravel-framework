@@ -13,6 +13,10 @@ return new class extends Migration
      */
     public function up(): void
     {
+        if (config('database.default') !== 'mysql_users') {
+            return;
+        }
+
         Schema::create('password_resets', function (Blueprint $table) {
             $table->string('email')->index();
             $table->string('token');
@@ -27,6 +31,10 @@ return new class extends Migration
      */
     public function down(): void
     {
+        if (config('database.default') !== 'mysql_users') {
+            return;
+        }
+
         Schema::dropIfExists('password_resets');
     }
 };

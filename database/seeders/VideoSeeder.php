@@ -2,11 +2,11 @@
 
 namespace Database\Seeders;
 
-use App\Models\RoleUser;
-use App\Models\User;
+use App\Models\Video;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class RoleUserSeeder extends Seeder
+class VideoSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -15,6 +15,6 @@ class RoleUserSeeder extends Seeder
      */
     public function run(): void
     {
-        RoleUser::factory(User::count())->create();
+        Video::factory(100)->create();
     }
 }
