@@ -34,7 +34,7 @@ class ValidationController extends Controller
 //            'phone' => ['required', 'string', 'unique:users,phone'],
             'phone' => ['required', 'string', new Phone, Rule::unique('users', 'phone')->ignore($user)],
             'website' => ['nullable', 'string', 'url'], // https://example.com
-            'uuid' => ['nullable', 'string', 'uuid'], // sdfsdf-sdfsd-sdfsdf-sdfsdf
+            'uuid' => ['nullable', 'string', 'uuid'], // sdfsdf-sdfsdf-sdfsdf-sdfsdf
             'ip' => ['nullable', 'string', 'ip'], // 127.0.0.1
             'avatar' => ['nullable', 'file', 'image', 'max:1024'], // 1Mb
             'birth_date' => ['nullable', 'string', 'date'], // 2021-10-09/09-10-2021 12:30:00
@@ -42,9 +42,9 @@ class ValidationController extends Controller
             'end_date' => ['required', 'string', 'data', 'after:start_date'],
             'services' => ['nullable', 'array', 'min:1', 'max:10'], // [1,2,3,4,5]
             'services.*' => ['required', 'integer'], // [1,2,3,4,5]
-//            'delivery' => ['required', 'array', 'size:2'], // ['date' => '2021-10-09', 'time' => '12:30:00']z
-//            'delivery.date' => ['required', 'string', 'date_format:Y.m.d'], // 2021-10-09
-//            'delivery.time' => ['required', 'string', 'date_format:H:i:s'], // 12:30:00
+            'delivery' => ['required', 'array', 'size:2'], // ['date' => '2021-10-09', 'time' => '12:30:00']
+            'delivery.date' => ['required', 'string', 'date_format:Y.m.d'], // 2021-10-09
+            'delivery.time' => ['required', 'string', 'date_format:H:i:s'], // 12:30:00
             'secret' => ['required', 'string', function ($attribute, $value, Closure $fail) {
                 if ($value !== config('example.secret')) {
                     $fail(__('Wrong secret key.'));
