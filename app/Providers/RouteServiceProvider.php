@@ -39,6 +39,7 @@ class RouteServiceProvider extends ServiceProvider
                     require base_path('routes/admin.php');
                     require base_path('routes/user.php');
                     require base_path('routes/morph.php');
+                    require base_path('routes/eloquent_queries.php');
                 });
         });
 
