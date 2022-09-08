@@ -15,9 +15,9 @@ return [
     |
     */
 
-//    'default' => env('DB_LARAVEL_CONNECTION', 'mysql'),
+    'default' => env('DB_LARAVEL_CONNECTION', 'mysql'),
 //    'default' => env('DB_DESKS_CONNECTION', 'mysql'),
-    'default' => env('DB_MORPH_CONNECTION', 'mysql'),
+//    'default' => env('DB_MORPH_CONNECTION', 'mysql'),
 
     /*
     |--------------------------------------------------------------------------
