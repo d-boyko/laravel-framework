@@ -22,6 +22,6 @@ class RegisterUserAction implements RegisterActionContract
         ]);
         Auth::login($user);
 
-        return $request;
+        return $user;
     }
 }

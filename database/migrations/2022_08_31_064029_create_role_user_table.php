@@ -13,9 +13,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        if (config('database.default') !== 'mysql_users') {
-            return;
-        }
+//        if (config('database.default') !== 'mysql_users' or config('database.default') !== 'mysql_test') {
+//            return;
+//        }
 
         Schema::create('role_user', function (Blueprint $table) {
             $table->unsignedBigInteger('user_id');

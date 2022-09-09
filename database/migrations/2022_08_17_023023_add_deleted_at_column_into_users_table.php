@@ -13,9 +13,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        if (config('database.default') !== 'mysql_users') {
-            return;
-        }
+//        if (config('database.default') !== 'mysql_users' or config('database.default') !== 'mysql_test') {
+//            return;
+//        }
 
         Schema::table('users', function (Blueprint $table) {
             $table->softDeletes()->after('id');
@@ -29,9 +29,9 @@ return new class extends Migration
      */
     public function down(): void
     {
-        if (config('database.default') !== 'mysql_users') {
-            return;
-        }
+//        if (config('database.default') !== 'mysql_users' or config('database.default') !== 'mysql_test') {
+//            return;
+//        }
 
         Schema::table('users', function (Blueprint $table) {
             $table->dropSoftDeletes();

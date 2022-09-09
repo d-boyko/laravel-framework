@@ -72,7 +72,8 @@ class AdminController extends Controller
      */
     public function updateUser(Request $request, UpdateUserGroupAction $action): Application|RedirectResponse|Redirector
     {
-        $action->handle($request);
+        $validatedData = $request->toArray();
+        $action->handle($validatedData);
         return redirect(route('admin.functions'));
     }
 }

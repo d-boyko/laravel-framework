@@ -9,6 +9,6 @@ class SendEmailUpdateUserAction implements UpdateUserContract
 {
     public function handle($data)
     {
-        event(new UpdateUserEvent($data->all()));
+        event(new UpdateUserEvent($data));
     }
 }

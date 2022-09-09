@@ -19,7 +19,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        $this->app->bind(RegisterActionContract::class, RegisterUserAction::class);
+//        $this->app->bind(RegisterActionContract::class, RegisterUserAction::class);
         $this->app->singleton(Connection::class, function () {
             return new Connection(config('database.default'));
         });

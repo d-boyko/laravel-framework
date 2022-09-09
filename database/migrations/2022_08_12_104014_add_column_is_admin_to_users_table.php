@@ -13,9 +13,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        if (config('database.default') !== 'mysql_users') {
-            return;
-        }
+//        if (config('database.default') !== 'mysql_users' or config('database.default') !== 'mysql_test') {
+//            return;
+//        }
 
         Schema::table('users', function (Blueprint $table) {
             $table->boolean('is_admin')->default(false);
@@ -30,9 +30,9 @@ return new class extends Migration
      */
     public function down(): void
     {
-        if (config('database.default') !== 'mysql_users') {
-            return;
-        }
+//        if (config('database.default') !== 'mysql_users' or config('database.default') !== 'mysql_test') {
+//            return;
+//        }
 
         Schema::table('users', function (Blueprint $table) {
             $table->dropColumn('is_admin');

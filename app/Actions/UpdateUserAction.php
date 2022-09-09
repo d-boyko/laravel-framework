@@ -4,19 +4,16 @@ namespace App\Actions;
 
 use App\Contracts\UpdateUserContract;
 use App\Models\User;
-use Illuminate\Http\Request;
 
 class UpdateUserAction implements UpdateUserContract
 {
     /**
      * @param $data
-     * @return Request
+     * @return bool
      */
-    public function handle($data): Request
+    public function handle($data): bool
     {
-        User::where('id', '=', $data->id)
-            ->update([$data->field => $data->newValue]);
-
-        return $data;
+        return User::where('id', '=', $data['id'])
+            ->update([$data['field'] => $data['newValue']]);
     }
 }
