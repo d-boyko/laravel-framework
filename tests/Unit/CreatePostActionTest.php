@@ -3,10 +3,13 @@
 namespace Tests\Unit;
 
 use App\Actions\CreatePostAction;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class CreatePostActionTest extends TestCase
 {
+    use RefreshDatabase;
+
     private CreatePostAction $action;
 
     public function setUp(): void

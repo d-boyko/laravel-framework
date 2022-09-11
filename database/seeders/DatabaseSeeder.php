@@ -2,7 +2,6 @@
 
 namespace Database\Seeders;
 
-use App\Models\SocialPost;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -14,12 +13,12 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-
         if (config('database.default') == 'mysql_users') {
             $this->call([
-                UserSeeder::class,
+//                UserSeeder::class,
+//                PostSeeder::class,
                 RoleSeeder::class,
-                PostSeeder::class,
+                UserPostSeeder::class,
                 VersionSeeder::class,
                 PhoneSeeder::class,
                 RoleUserSeeder::class,
@@ -39,6 +38,15 @@ class DatabaseSeeder extends Seeder
                 SocialPostSeeder::class,
                 TagSeeder::class,
                 TaggableSeeder::class,
+            ]);
+        } elseif (config('database.default') == 'mysql_unit') {
+            $this->call([
+                UserPostSeeder::class,
+                UserPhoneSeeder::class,
+//                PhoneSeeder::class,
+                RoleSeeder::class,
+                VersionSeeder::class,
+                RoleUserSeeder::class,
             ]);
         }
     }
