@@ -3,7 +3,6 @@
 namespace Tests\Unit;
 
 use App\Actions\CreatePostAction;
-use Illuminate\Support\Facades\Log;
 use Tests\TestCase;
 
 class CreatePostActionTest extends TestCase

@@ -11,7 +11,7 @@ class CreateUserAction
     public function handle(): Model|User
     {
         return User::create([
-            'name' => 'Daniil Boyko',
+            'name' => 'User was createdv2',
             'email' => Str::random(10),
             'password' => 'test_password',
         ]);

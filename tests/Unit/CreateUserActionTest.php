@@ -3,13 +3,16 @@
 namespace Tests\Unit;
 
 use App\Actions\CreateUserAction;
-use App\Actions\RegisterUserAction;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Str;
 use Tests\TestCase;
 
 class CreateUserActionTest extends TestCase
 {
+    use RefreshDatabase;
+
     private CreateUserAction $action;
 
     public function setUp(): void
@@ -25,10 +28,14 @@ class CreateUserActionTest extends TestCase
      */
     public function testRegisterUserAction(): User|Model
     {
-        $userName = 'Daniil Boyko';
+        $user = User::make([
+            'name' => 'User was createdv2',
+            'email' => Str::random(10),
+            'password' => 'test_password',
+        ]);
 
         $response = $this->action->handle();
-        $this->assertEquals($userName, $response->name);
+        $this->assertEquals($user->name, $response->name);
 
         return $response;
     }
