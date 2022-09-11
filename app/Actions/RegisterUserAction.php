@@ -11,9 +11,9 @@ class RegisterUserAction implements RegisterActionContract
 {
     /**
      * @param UserRegistrationRequest $request
-     * @return UserRegistrationRequest
+     * @return User
      */
-    public function handle(UserRegistrationRequest $request): UserRegistrationRequest
+    public function handle(UserRegistrationRequest $request): User
     {
         $user = User::create([
             'name' => $request->name,
@@ -22,6 +22,6 @@ class RegisterUserAction implements RegisterActionContract
         ]);
         Auth::login($user);
 
-        return $request;
+        return $user;
     }
 }

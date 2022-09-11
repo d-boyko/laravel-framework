@@ -6,9 +6,9 @@ use App\Models\Post;
 
 class CreatePostAction
 {
-    public function handle(): void
+    public function handle(): Post
     {
-        Post::create([
+        return Post::create([
             'user_id' => 100,
             'title' => 'Test creating title',
             'content' => 'Test creating content'

@@ -3,7 +3,7 @@
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\RoleController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\UserController;
+
 Route::name('user.')->group(function() {
     Route::prefix('user')->group(function () {
         Route::redirect('/', '/user/posts');
