@@ -22,13 +22,15 @@ class AdminController extends Controller
 
     public function exportUsersCsv()
     {
-        ExportCsvUsersTable::dispatch();
+        ExportCsvUsersTable::dispatch()
+            ->onQueue('export');
         return redirect(route('admin.functions'));
     }
 
     public function exportPostsCsv()
     {
-        ExportCsvPostsTable::dispatch();
+        ExportCsvPostsTable::dispatch()
+            ->delay(now()->addRealMinutes()); // starting job with delaying
         return redirect(route('admin.functions'));
     }
 

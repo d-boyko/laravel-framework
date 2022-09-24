@@ -9,6 +9,8 @@ use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Response;
+use Mockery\Exception;
+use Str;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
 class ExportCsvUsersTable implements ShouldQueue
@@ -18,11 +20,17 @@ class ExportCsvUsersTable implements ShouldQueue
     /**
      * Execute the job.
      *
+     * @return BinaryFileResponse
+     * @throws Exception
      */
     public function handle(): BinaryFileResponse
     {
         $users = User::all();
-        $fileName = 'users_table.csv';
+        $fileName = 'users_table_' . now()->format('Y_m_d') . Str::random(5) . '.csv';
+
+        if (file_exists($fileName)) {
+            throw new Exception('File with users is already exists');
+        }
 
         $handle = fopen($fileName, 'w+');
         fputcsv($handle, array(

@@ -17,13 +17,13 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [IndexController::class, 'index'])->name('last-version');
 
-Route::get('/all-paginate', [IndexController::class, 'allPagination'])->name('pagination-all');
-
 Route::get('/all', [IndexController::class, 'all'])->name('all-versions');
+
+Route::get('/all-paginate', [IndexController::class, 'allPagination'])->name('pagination-all');
 
 Route::apiResources([
     'desks' => DeskController::class
 ]);
 
-//Route::get('/desks', [DeskController::class, 'index'])->name('desk.index');
-//Route::get('/desks/{id}', [DeskController::class, 'show'])->name('desk.show');
+Route::get('/desks', [DeskController::class, 'index'])->name('desk.index');
+Route::get('/desks/{id}', [DeskController::class, 'show'])->name('desk.show');

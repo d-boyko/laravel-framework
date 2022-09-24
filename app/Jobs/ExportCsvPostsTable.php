@@ -9,6 +9,7 @@ use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Response;
+use Str;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
 class ExportCsvPostsTable implements ShouldQueue
@@ -22,7 +23,7 @@ class ExportCsvPostsTable implements ShouldQueue
     public function handle(): BinaryFileResponse
     {
         $users = Post::all();
-        $fileName = 'posts_table.csv';
+        $fileName = 'posts_table_' . now()->format('Y_m_d') . Str::random(5) . '.csv';
 
         $handle = fopen($fileName, 'w+');
         fputcsv($handle, array('id', 'user_id', 'created_at', 'title', 'content', 'is_published'));
