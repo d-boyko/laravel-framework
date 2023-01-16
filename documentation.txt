@@ -235,8 +235,9 @@ artisan {
     Когда мы выполняем команду php artisan... берем app.php, берем консольное ядро Kernel и обрабатываем команду
 }
 
-AboutFiles.txt {
+documentation.txt {
     То что ты читаешь сейчас --__--
+    Такого нет в начальной сборке Laravel
 }
 
 composer.json {
@@ -288,7 +289,7 @@ Custom commands
 -----------------------------------------------------------------------------------------------------------
 Можно создавать кастомные команды. Например, в sxope-ocean это pipeline:run, либо bq_to_spanner, send_flush_cache и другие.
 Чтобы создать custom команду:
-    php artisan make:commands SendEmails
+    php artisan make:command SendEmails
 
 После создания команды следует заполнить свойства $signature - это слова по которым команда будет запускаться (bq_to_spanner:load, pipeline:run),
 а также свойство $description - краткое описание команды.
